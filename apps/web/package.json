@@ -30,6 +30,7 @@
     "@repo/redis": "*",
     "@repo/email": "*",
     "@repo/database": "*",
-    "@repo/ui": "*"
+    "@repo/ui": "*",
+    "@repo/scraper": "*"
   }
 }

@@ -1,8 +1,12 @@
 {
   "crons": [
     {
-      "path": "/api/scrap-jobs",
-      "schedule": "0 2 * * *"
-    }   
+      "path": "/api/crons/delete-jobs",
+      "schedule": "0 0 1 * *"
+    },
+    {
+      "path": "/api/crons/scrap-jobs",
+      "schedule": "0 0 * * *"
+    }
   ]
 }

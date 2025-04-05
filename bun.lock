@@ -28,6 +28,7 @@
         "@repo/email": "*",
         "@repo/eslint-config": "*",
         "@repo/redis": "*",
+        "@repo/scraper": "*",
         "@repo/typescript-config": "*",
         "@repo/ui": "*",
         "@repo/validations": "*",

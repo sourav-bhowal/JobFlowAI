@@ -173,7 +173,9 @@ export const internshalaJobScraper = async (): Promise<void> => {
     allJobs.map((job) => ({
       ...job,
       jobLink: job.jobLink
-        ? `https://internshala.com${job.jobLink}`
+        ? job.jobLink.startsWith("http")
+          ? job.jobLink
+          : `https://internshala.com${job.jobLink}`
         : undefined,
     }))
   );
