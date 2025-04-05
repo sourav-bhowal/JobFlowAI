@@ -32,15 +32,21 @@ export default function HeroTiles() {
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
       <div className="rounded-lg bg-neutral-900 p-8 backdrop-blur-sm">
-        <div className="text-5xl font-bold text-primary">{percentage}%</div>
+        <div className="text-5xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+          {percentage}%
+        </div>
         <div className="mt-2 text-lg">Match Accuracy</div>
       </div>
       <div className="rounded-lg bg-neutral-900 p-8 backdrop-blur-sm">
-        <div className="text-5xl font-bold text-primary">{jobsDaily}+</div>
+        <div className="text-5xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+          {jobsDaily}+
+        </div>
         <div className="mt-2 text-lg">Jobs Daily</div>
       </div>
       <div className="rounded-lg bg-neutral-900 p-8 backdrop-blur-sm">
-        <div className="text-5xl font-bold text-primary">{fasterMatches}x</div>
+        <div className="text-5xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+          {fasterMatches}x
+        </div>
         <div className="mt-2 text-lg">Faster Matches</div>
       </div>
     </div>

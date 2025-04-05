@@ -2,9 +2,12 @@ import Link from "next/link";
 import { navLinks } from "@/src/utils/NavLinks";
 import { Button } from "@workspace/ui/components/button";
 import MobileNavBar from "./MobileNavBar";
+import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
 
 // NavBar component
-export default function NavBar() {
+export default async function NavBar() {
+  const session = await auth();
+  const loggedInUser = session?.user;
   return (
     <nav className="bg-neutral-900 text-white w-full sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,9 +15,11 @@ export default function NavBar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <span className="text-xl font-bold border-b-3 border-primary">
+              <span className="text-xl font-bold border-b-3 border-yellow-600">
                 JobNest
-                <span className="text-primary">AI</span>
+                <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                  AI
+                </span>
               </span>
             </Link>
           </div>
@@ -35,22 +40,30 @@ export default function NavBar() {
                 ))}
               </div>
               <div className="ml-10 flex items-center space-x-4">
-                <Link href={"/signin"}>
-                  <Button
-                    size={"lg"}
-                    className="bg-transparent border-2 border-yellow-600 font-semibold shadow-md hover:bg-transparent hover:shadow-yellow-600 transition-shadow duration-300 ease-in-out"
-                  >
-                    SignIn
-                  </Button>
-                </Link>
-                <Link href={"signup"}>
-                  <Button
-                    size={"lg"}
-                    className="bg-gradient-to-r from-yellow-600 to-orange-600 font-semibold shadow-md hover:shadow-orange-600 transition-shadow duration-300 ease-in-out"
-                  >
-                    SignUp
-                  </Button>
-                </Link>
+                {loggedInUser ? (
+                  <>
+                  
+                  </>
+                ) : (
+                  <>
+                    <Link href={"/signin"}>
+                      <Button
+                        size={"lg"}
+                        className="bg-transparent border-2 border-yellow-600 font-semibold shadow-md hover:bg-transparent hover:shadow-yellow-600 transition-shadow duration-300 ease-in-out"
+                      >
+                        SignIn
+                      </Button>
+                    </Link>
+                    <Link href={"signup"}>
+                      <Button
+                        size={"lg"}
+                        className="bg-gradient-to-r from-yellow-600 to-orange-600 font-semibold shadow-md hover:shadow-orange-600 transition-shadow duration-300 ease-in-out"
+                      >
+                        SignUp
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

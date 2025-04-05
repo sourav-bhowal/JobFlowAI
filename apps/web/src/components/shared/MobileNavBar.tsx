@@ -82,6 +82,7 @@ export default function MobileNavBar() {
           <div className="flex space-x-4 p-4">
             <Link href={"/signin"}>
               <Button
+                onClick={toggleMenu}
                 size={"lg"}
                 className="bg-transparent border-2 border-primary font-semibold shadow-md hover:bg-transparent hover:shadow-primary transition-shadow duration-300 ease-in-out"
               >
@@ -90,6 +91,7 @@ export default function MobileNavBar() {
             </Link>
             <Link href={"/signup"}>
               <Button
+                onClick={toggleMenu}
                 size={"lg"}
                 className="text-neutral-900 font-semibold shadow-md hover:shadow-primary transition-shadow duration-300 ease-in-out"
               >

@@ -3,16 +3,12 @@ import dotenv from "dotenv";
 import path from "path";
 
 // Load the environment variables
-const envPath = path.resolve(__dirname, ".env");
-dotenv.config({ path: envPath });
-
-// RabbitMQ connection string
-const RABBITMQ_URL = process.env.RABBITMQ_URL!;
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // Connect to RabbitMQ
 export const connectRabbitMQ = async () => {
   try {
-    const connection = await amqp.connect(RABBITMQ_URL);
+    const connection = await amqp.connect(process.env.RABBITMQ_URL!);
     console.log("Connected to RabbitMQ");
     const channel = await connection.createChannel();
     return { connection, channel };

@@ -4,15 +4,15 @@ import prisma from "@repo/database/prisma";
 export async function GET(request: Request) {
   try {
     // Headers check
-    const authHeader = request.headers.get("Authorization");
+    // const authHeader = request.headers.get("Authorization");
 
-    // Check if header is valid
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-      return Response.json(
-        { error: "Invalid authorization header" },
-        { status: 401 }
-      );
-    }
+    // // Check if header is valid
+    // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    //   return Response.json(
+    //     { error: "Invalid authorization header" },
+    //     { status: 401 }
+    //   );
+    // }
 
     // Delete all jobs from the database that are older than 1 month
     await prisma.job.deleteMany({

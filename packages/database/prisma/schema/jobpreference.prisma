@@ -2,12 +2,14 @@ model JobPreferences {
     id     String @id @default(cuid())
     userId String @unique
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    
+
     // Job Preferences
     keywords String[]
     location String[]
     remote   Boolean?
     jobTypes JobType[]
+
+    vector Float[] @default([])
 
     // Date & Time
     createdAt DateTime @default(now())

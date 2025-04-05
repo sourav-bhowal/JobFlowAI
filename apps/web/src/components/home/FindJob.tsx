@@ -74,7 +74,7 @@ export default function JobSearchForm() {
         <h1 className="text-4xl md:text-5xl font-bold mb-2">
           Find Your Dream Job
         </h1>
-        <div className="w-32 h-1 bg-primary mx-auto mb-6"></div>
+        <div className="w-32 h-1 bg-gradient-to-r from-yellow-600 to-orange-600 mx-auto mb-6"></div>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto">
           Our AI-powered search engine scans thousands of listings to find
           opportunities that match your unique skills and preferences.
@@ -92,7 +92,7 @@ export default function JobSearchForm() {
                   <FormItem>
                     <FormLabel>Job Title</FormLabel>
                     <div className="relative focus-within:scale-105 transition-all ease-in-out duration-300">
-                      <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary" />
+                      <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-yellow-600" />
                       <FormControl>
                         <Input
                           placeholder="e.g. New York or Remote"
@@ -113,7 +113,7 @@ export default function JobSearchForm() {
                   <FormItem>
                     <FormLabel>Location</FormLabel>
                     <div className="relative focus-within:scale-105 transition-all ease-in-out duration-300">
-                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary" />
+                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-yellow-600" />
                       <FormControl>
                         <Input
                           placeholder="e.g. New York or Remote"
@@ -138,9 +138,9 @@ export default function JobSearchForm() {
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <Award className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary" />
+                        <Award className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-yellow-600" />
                         <FormControl>
-                          <SelectTrigger className="pl-10 bg-zinc-800 border-zinc-700 text-white focus-visible:ring-0 focus-visible:ring-offset-0">
+                          <SelectTrigger className="pl-10 bg-zinc-800 border-zinc-700 text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0">
                             <SelectValue placeholder="Select job type" />
                           </SelectTrigger>
                         </FormControl>
@@ -206,7 +206,7 @@ export default function JobSearchForm() {
 
               <Button
                 type="submit"
-                className="text-black font-medium px-6 shadow-md hover:shadow-primary duration-500 hover:scale-105 transition-all ease-in-out"
+                className="bg-gradient-to-r from-yellow-600 to-orange-600 font-medium px-6 shadow-md hover:shadow-orange-600 duration-500 hover:scale-105 transition-all ease-in-out"
                 disabled={form.formState.isSubmitting || isSearching}
               >
                 {form.formState.isSubmitting ? (

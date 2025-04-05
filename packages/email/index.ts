@@ -4,10 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 // Load the environment variables
-const envPath = path.resolve(__dirname, ".env");
-
-// Ensure the environment variables are loaded
-dotenv.config({ path: envPath });
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // Initailize the Resend email client
 const resend = new Resend(process.env.RESEND_API_KEY!);

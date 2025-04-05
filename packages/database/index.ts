@@ -19,12 +19,13 @@ export default prisma;
 if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
 
 // Get User Data
-export function getUserData(userId: string) {
+export function getUserData() {
   return {
     id: true,
     username: true,
     firstName: true,
     lastName: true,
+    avatar: true,
     email: true,
     bio: true,
     city: true,
@@ -47,11 +48,11 @@ export type UserDataType = Prisma.UserGetPayload<{
 }>;
 
 // Get user Job Preferences
-export function getUserJobPreferences(userId: string) {
+export function getUserJobPreferences() {
   return {
     id: true,
     user: {
-      select: getUserData(userId),
+      select: getUserData(),
     },
     jobTypes: true,
     remote: true,
@@ -64,3 +65,4 @@ export function getUserJobPreferences(userId: string) {
 export type UserJobPreferencesType = Prisma.JobPreferencesGetPayload<{
   select: ReturnType<typeof getUserJobPreferences>;
 }>;
+
