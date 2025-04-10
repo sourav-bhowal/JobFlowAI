@@ -1,5 +1,5 @@
 import { connectRabbitMQ } from "@repo/rabbitmq";
-import { Job } from "../types/job-type.js";
+import { SelectJob } from "@repo/db/schema";
 
 // Queue name
 export const QUEUE_NAME = "jobQueue";
@@ -8,7 +8,7 @@ export const QUEUE_NAME = "jobQueue";
 const BATCH_SIZE = 20;
 
 // Producer function to send jobs to the queue
-export const sendJobsToQueue = async (jobs: Job[]): Promise<void> => {
+export const sendJobsToQueue = async (jobs: SelectJob[]): Promise<void> => {
   try {
     // Get the channel and connection
     const { channel, connection } = await connectRabbitMQ();

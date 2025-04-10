@@ -12,6 +12,7 @@ const JobTypeEnum = z.enum([
 export const updateJobPreferencesSchema = z.object({
   keywords: z.array(z.string()).optional(), // Array of keywords
   location: z.array(z.string()).optional(), // Array of locations
+  skills: z.array(z.string()).optional(), // Array of skills
   remote: z.boolean().nullable().optional(), // Optional remote flag
   jobTypes: z.array(JobTypeEnum).optional(), // Job types (array of enum values)
 });

@@ -1,27 +1,22 @@
-import prisma from "@repo/database/prisma";
-import { Job } from "../types/job-type.js";
 import { createJobEmbedding } from "../lib/jobEmbedding.js";
+import { jobs, SelectJob } from "@repo/db/schema";
+import { db } from "@repo/db/drizzle";
 
-// Process Jobs from RabbitMQ and save them to the database
-export async function insertJobInDB(jobBatch: Job[]) {
+export async function insertJobInDB(jobBatch: SelectJob[]) {
   try {
-    // If the jobBatch is empty, return
-    if (jobBatch.length === 0 || !jobBatch) {
+    if (!jobBatch || jobBatch.length === 0) {
       console.log("No job to insert in DB");
       return;
     }
 
-    // Get the vector embeddings for the job
-    const jobEmbeddings = await createJobEmbedding(jobBatch);
+    // Step 1: Generate embeddings for each job
+    const jobEmbeddings = await createJobEmbedding(jobBatch); // returns Float[][]
 
-    // Prepare data for createMany
+    // Step 2: Prepare the data for insertion
     const jobsToInsert = jobBatch.map((job, index) => ({
-      title: job.title || "",
       companyName: job.companyName,
       companyLink: job.companyLink,
-      jobType: job.jobType,
       responsibilities: job.responsibilities,
-      skills: job.skills,
       tags: job.tags,
       benefits: job.benefits,
       currency: job.currency,
@@ -29,23 +24,30 @@ export async function insertJobInDB(jobBatch: Job[]) {
       minSalary: job.minSalary,
       maxSalary: job.maxSalary,
       remote: job.remote,
-      location: job.location,
-      description: job.description,
       insights: job.insights,
-      link: job.link,
       applyLink: job.applyLink,
       applyBy: job.applyBy,
+
+      // Internshala specific fields
+      title: job.title || "",
+      company: job.company,
+      location: job.location,
+      experience: job.experience,
+      salary: job.salary,
+      jobType: job.jobType,
+      logo: job.logo,
+      jobLink: job.jobLink,
+      description: job.description,
+      skills: job.skills,
       postedAt: job.postedAt,
-      vector: jobEmbeddings[index], // Store the corresponding vector embedding
+      vector: jobEmbeddings[index], // embedding for the job
     }));
 
-    // Insert all jobs into the database
-    await prisma.job.createMany({
-      data: jobsToInsert,
-      skipDuplicates: true, // Optional: Skip duplicate entries based on unique constraints
-    });
-    console.log("Job inserted in DB");
+    // Step 3: Insert jobs into the database
+    await db.insert(jobs).values(jobsToInsert);
+
+    console.log(`Inserted ${jobBatch.length} jobs into DB`);
   } catch (error) {
-    console.error("Error inserting job in DB", error);
+    console.error("❌ Error inserting jobs into DB:", error);
   }
 }

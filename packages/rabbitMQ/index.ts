@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 // Load the environment variables
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // Connect to RabbitMQ
 export const connectRabbitMQ = async () => {

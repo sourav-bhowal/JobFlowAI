@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "job_preferences" ADD COLUMN     "vector" DOUBLE PRECISION[] DEFAULT ARRAY[]::DOUBLE PRECISION[];

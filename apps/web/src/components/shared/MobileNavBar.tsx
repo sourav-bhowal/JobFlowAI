@@ -2,7 +2,7 @@
 import { Menu, X } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { useEffect, useRef, useState } from "react";
-import { navLinks } from "@/src/utils/NavLinks";
+import { navLinks } from "@/src/utils/utils";
 import Link from "next/link";
 import { gsap } from "gsap";
 

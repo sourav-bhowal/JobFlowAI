@@ -1,15 +1,17 @@
 import { openai } from "@repo/openai";
-import { Job } from "../types/job-type.js";
+import { SelectJob } from "@repo/db/schema";
 
 // Function to create job embeddings
-export async function createJobEmbedding(jobData: Job[]) {
+export async function createJobEmbedding(jobData: SelectJob[]) {
   // Input text for the OpenAI API
   const inputText = jobData.map(
     (job) =>
       `Job Title: ${job.title}` +
       `Job Description: ${job.description}` +
       `Required Skills: ${job.skills?.join(", ") ?? ""}` +
-      `Job Type: ${job.jobType ?? ""}`
+      `Location: ${job.location ?? ""}` +
+      `Job Type: ${job.jobType ?? ""}` +
+      `Remote: ${job.remote ? "Yes" : "No"}`
   );
 
   // Trancate the input text to 2048 characters
@@ -21,7 +23,7 @@ export async function createJobEmbedding(jobData: Job[]) {
       model: "text-embedding-3-small", // Use the text-embedding-3-small model
       input: truncatedText, // Input text
     });
-    
+
     console.log("Job embedding created.");
 
     // Return the embedding

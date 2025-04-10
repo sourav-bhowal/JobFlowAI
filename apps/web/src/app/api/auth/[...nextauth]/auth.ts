@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInSchema } from "@repo/validations/src/auth-validation";
 import bcrypt from "bcrypt";
-import prisma from "@repo/database/prisma";
+import { db } from "@repo/db/drizzle";
 
 // NextAuth configuration
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -30,7 +30,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { email, password } = signInSchema.parse(credentials);
 
           // Check if the user exists
-          const user = await prisma.user.findUnique({ where: { email } });
+          const user = await db.query.users.findFirst({
+            where: (users, { eq }) => eq(users.email, email),
+          });
 
           // If user does not exist, return an error
           if (!user) {

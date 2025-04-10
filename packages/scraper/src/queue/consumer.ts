@@ -40,3 +40,5 @@ export const consumeJobsFromQueue = async () => {
     process.exit(1); // exit with failure
   }
 };
+
+consumeJobsFromQueue();

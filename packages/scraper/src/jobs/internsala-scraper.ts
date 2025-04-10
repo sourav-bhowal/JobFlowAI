@@ -1,11 +1,12 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import { sendJobsToQueue } from "../queue/producer.js";
-import { Job } from "../types/job-type.js";
+import { SelectJob } from "@repo/db/schema";
+import { filterAndFormatJobs } from "../lib/FilterOldJobPost.js";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
   // Base URL for Internshala jobs
-  const BASE_URL = "https://internshala.com/jobs/web-development-jobs";
+  const BASE_URL = "https://internshala.com/jobs/computer-science-jobs";
 
   // Launch Puppeteer browser
   const browser: Browser = await puppeteer.launch({
@@ -42,7 +43,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   };
 
   // Function to extract job details from the page
-  const extractJobs = async (): Promise<Job[]> => {
+  const extractJobs = async (): Promise<SelectJob[]> => {
     return await page.evaluate(() => {
       return Array.from(
         document.querySelectorAll(".individual_internship")
@@ -73,19 +74,23 @@ export const internshalaJobScraper = async (): Promise<void> => {
         jobLink:
           jobElement.querySelector(".job-title-href")?.getAttribute("href") ||
           "",
-      })) as Job[];
+        postedAt:
+          jobElement
+            .querySelector(".status-success span")
+            ?.textContent?.trim() || "",
+      })) as SelectJob[];
     });
   };
 
   // Function to get job details from the job page
-  const getJobDetails = async (jobUrl: string): Promise<Partial<Job>> => {
+  const getJobDetails = async (jobUrl: string): Promise<Partial<SelectJob>> => {
     const jobPage: Page = await browser.newPage();
 
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
       waitUntil: "domcontentloaded",
     });
 
-    const jobDetails: Partial<Job> = await jobPage.evaluate(() => {
+    const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
       return {
         description:
           document.querySelector(".text-container")?.textContent?.trim() || "",
@@ -113,14 +118,14 @@ export const internshalaJobScraper = async (): Promise<void> => {
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
-    currentPage <= Math.min(2, totalPages); // limit to 2 pages for now
+    currentPage <= Math.min(3, totalPages); // limit to 2 pages for now
     currentPage++
   ) {
     // Auto-scroll to load all jobs on the page
     await autoScroll();
 
     // Extract jobs from the current page
-    let jobsOnPage: Job[] = await extractJobs();
+    let jobsOnPage: SelectJob[] = await extractJobs();
 
     // Loop through each job to fetch additional details
     for (let i = 0; i < jobsOnPage.length; i++) {
@@ -137,15 +142,11 @@ export const internshalaJobScraper = async (): Promise<void> => {
       `Scraped Page ${currentPage}/${totalPages}, Jobs on Page: ${jobsOnPage.length}`
     );
 
+    // Filter and format jobs
+    const filteredJobs = filterAndFormatJobs(jobsOnPage);
+
     // Send page-wise jobs to queue
-    await sendJobsToQueue(
-      jobsOnPage.map((job) => ({
-        ...job,
-        jobLink: job.jobLink?.startsWith("http")
-          ? job.jobLink
-          : `https://internshala.com${job.jobLink}`,
-      }))
-    );
+    await sendJobsToQueue(filteredJobs);
 
     // Check if there are more pages to scrape
     const isLastPage: boolean = await page.evaluate(

@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { navLinks } from "@/src/utils/NavLinks";
-import { Button } from "@workspace/ui/components/button";
+import { navLinks } from "@/src/utils/utils";
 import MobileNavBar from "./MobileNavBar";
+import UserButton from "./UserButton";
 import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
+import { Button } from "@workspace/ui/components/button";
+import { User } from "next-auth";
 
 // NavBar component
 export default async function NavBar() {
   const session = await auth();
-  const loggedInUser = session?.user;
+  const loggedInUser = session?.user as User;
   return (
     <nav className="bg-neutral-900 text-white w-full sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,9 +43,7 @@ export default async function NavBar() {
               </div>
               <div className="ml-10 flex items-center space-x-4">
                 {loggedInUser ? (
-                  <>
-                  
-                  </>
+                  <UserButton loggedInUser={loggedInUser} />
                 ) : (
                   <>
                     <Link href={"/signin"}>

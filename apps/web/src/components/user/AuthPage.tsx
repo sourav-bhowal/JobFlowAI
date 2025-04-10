@@ -67,7 +67,8 @@ export default function AuthPage({ isSignIn }: AuthPageProps) {
     if (isSignIn) {
       startTransition(async () => {
         const result = await signIn("credentials", {
-          redirect: false,
+          redirect: true,
+          redirectTo: "/",
           email: data.email,
           password: data.password,
         });
@@ -78,10 +79,10 @@ export default function AuthPage({ isSignIn }: AuthPageProps) {
             toast.error(result.error);
           }
         }
-        if (result?.url) {
-          toast.success("Signed in successfully");
-          router.replace("/");
-        }
+        // if (result?.url) {
+        //   toast.success("Signed in successfully");
+        //   router.replace("/");
+        // }
       });
     } else {
       startTransition(async () => {

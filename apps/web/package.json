@@ -29,8 +29,9 @@
     "@repo/validations": "*",
     "@repo/redis": "*",
     "@repo/email": "*",
-    "@repo/database": "*",
+    "@repo/db": "*",
     "@repo/ui": "*",
-    "@repo/scraper": "*"
+    "@repo/scraper": "*",
+    "@repo/openai": "*"
   }
 }

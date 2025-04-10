@@ -1,4 +1,4 @@
-import { internshalaJobScraper, consumeJobsFromQueue } from "@repo/scraper";
+import { internshalaJobScraper } from "@repo/scraper";
 
 // Scraping function to be called by the cron job
 export async function GET(request: Request) {
@@ -14,8 +14,8 @@ export async function GET(request: Request) {
     //   );
     // }
 
-    // Run Both Scraper and Consumer
-    await Promise.all([internshalaJobScraper(), consumeJobsFromQueue()]);
+    // Scrape jobs from Internshala
+    await internshalaJobScraper();
 
     // Return a success response
     return Response.json(

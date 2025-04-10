@@ -1,6 +1,9 @@
 import { Redis } from "ioredis";
 import dotenv from "dotenv";
-dotenv.config();
+import path from "path";
+
+// Load the environment variables
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // Create a new Redis instance
 export const redis = new Redis({

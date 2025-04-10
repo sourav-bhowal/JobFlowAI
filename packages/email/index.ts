@@ -4,10 +4,12 @@ import dotenv from "dotenv";
 import path from "path";
 
 // Load the environment variables
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 // Initailize the Resend email client
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+console.log(process.env.RESEND_API_KEY);
 
 // Props for the welcome email
 interface WelcomeEmailProps {
