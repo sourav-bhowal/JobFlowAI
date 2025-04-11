@@ -1,15 +1,16 @@
 import { SelectJob } from "@repo/db/schema";
 
+// Function to check if a job was posted within the last 24 hours
 export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
   const now = new Date();
 
-  const regex = /(\d+)\s+(second|minute|hour|day)s?\s+ago/;
+  const regex = /(?:(\d+)|a few|few)\s+(second|minute|hour|day)s?\s+ago/i;
   const match = postedAt.match(regex);
 
   if (!match) return false;
 
-  const amount = parseInt(match[1] || "0", 10); // Provide a default value of '0' if match[1] is undefined
-  const unit = match[2] || ""; // Provide a default value of an empty string if match[2] is undefined
+  const amount = match[1] ? parseInt(match[1], 10) : 1; // "few" or "a few" treated as 1
+  const unit = match[2]?.toLowerCase() || "";
 
   const postedDate = new Date(now);
   switch (unit) {
@@ -30,9 +31,10 @@ export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
   }
 
   const diff = now.getTime() - postedDate.getTime();
-  return diff <= 1000 * 60 * 60 * 24; // 24 hours in ms
+  return diff <= 1000 * 60 * 60 * 24; // within 24 hours
 };
 
+// Function to filter and format jobs
 export const filterAndFormatJobs = (jobs: SelectJob[]): SelectJob[] => {
   const seen = new Set<string>();
 
@@ -51,4 +53,19 @@ export const filterAndFormatJobs = (jobs: SelectJob[]): SelectJob[] => {
         ? job.jobLink
         : `https://internshala.com${job.jobLink}`,
     }));
+};
+
+// Function to filter and format jobs from Naukri
+export const filterAndFormatNaukriJobs = (jobs: SelectJob[]): SelectJob[] => {
+  const seen = new Set<string>();
+
+  return jobs
+    .filter((job) => job.title && job.title.trim() !== "")
+    .filter((job) => isPostedWithinLast24Hours(job.postedAt || ""))
+    .filter((job) => {
+      const key = `${job.title?.trim().toLowerCase()}|${job.company?.trim().toLowerCase()}|${job.location?.trim().toLowerCase()}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 };

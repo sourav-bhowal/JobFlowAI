@@ -206,25 +206,29 @@ export async function updateUserJobPreferenceAction(
     await createUserJobPreferenceEmbedding(values);
 
   // Upsert the user job preferences so that it creates a new record if it doesn't exist
-  const [updatedJobPreferences] = await db.insert(jobPreferences).values({
-    userId: user.id as string,
-    jobTypes,
-    remote,
-    keywords,
-    location,
-    skills,
-    vector: userJobPreferenceEmbedding,
-  }).onConflictDoUpdate({
-    target: jobPreferences.userId,
-    set: {
+  const [updatedJobPreferences] = await db
+    .insert(jobPreferences)
+    .values({
+      userId: user.id as string,
       jobTypes,
       remote,
       keywords,
       location,
       skills,
       vector: userJobPreferenceEmbedding,
-    },
-  }).returning();
+    })
+    .onConflictDoUpdate({
+      target: jobPreferences.userId,
+      set: {
+        jobTypes,
+        remote,
+        keywords,
+        location,
+        skills,
+        vector: userJobPreferenceEmbedding,
+      },
+    })
+    .returning();
 
   // If job preferences are not updated, return an error
   if (!updatedJobPreferences) {

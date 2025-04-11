@@ -69,7 +69,10 @@ export default function JobSearchForm() {
 
   // Render the form
   return (
-    <div className="w-full bg-black text-white flex flex-col items-center justify-center px-4 py-16">
+    <div
+      className="w-full bg-black text-white flex flex-col items-center justify-center px-4 py-16"
+      id="find-jobs"
+    >
       <div className="max-w-4xl w-full text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-2">
           Find Your Dream Job

@@ -1,9 +1,28 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@workspace/ui/components/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@workspace/ui/components/card";
 import React from "react";
 
-export default function JobCardLoadingSkeleton() {
+// Loading skeleton for the job card
+export function JobCardLoadingSkeletonSM() {
   return (
-    <div className="sm:hidden space-y-4">
+    <div className="flex flex-col max-w-6xl mx-auto">
+      <div className="max-sm:w-full w-64 h-10 bg-zinc-800 rounded-lg animate-pulse mb-6" />
+      <div className="flex flex-col gap-4">
+        <JobCardSkeleton />
+        <JobCardSkeleton />
+      </div>
+    </div>
+  );
+}
+
+// JobCardSkeleton component
+function JobCardSkeleton() {
+  return (
+    <div className="space-y-4">
       <div className="animate-pulse">
         <Card className="bg-zinc-900 border-zinc-800 overflow-hidden">
           <CardHeader className="pb-2">
@@ -20,11 +39,6 @@ export default function JobCardLoadingSkeleton() {
 
             {/* Job title placeholder */}
             <div className="h-6 w-3/4 bg-zinc-800 rounded mt-2" />
-
-            {/* Progress bar placeholder */}
-            <div className="w-full mt-3">
-              <div className="h-1.5 bg-zinc-800 rounded" />
-            </div>
           </CardHeader>
 
           <CardContent className="py-2 space-y-3">

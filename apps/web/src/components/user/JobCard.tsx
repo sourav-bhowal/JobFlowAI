@@ -134,7 +134,11 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                       <div className="flex items-center">
                         <Clock className="h-3.5 w-3.5 mr-1 text-yellow-500" />
                         <span>
-                          {new Date(job.createdAt!!).toLocaleDateString()}
+                          {
+                            new Date(job.createdAt!!)
+                              .toISOString()
+                              .split("T")[0]
+                          }
                         </span>
                       </div>
                     </div>
@@ -289,7 +293,9 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-3 w-3 mr-1 text-yellow-500" />
-                  <span>{new Date(job.createdAt!!).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(job.createdAt!!).toISOString().split("T")[0]}
+                  </span>
                 </div>
                 <div className="flex items-center col-span-2">
                   <IndianRupee className="h-3 w-3 mr-1 text-yellow-500" />
