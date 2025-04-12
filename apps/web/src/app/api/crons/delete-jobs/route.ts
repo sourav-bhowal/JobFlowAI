@@ -1,4 +1,5 @@
-import prisma from "@repo/database/prisma";
+import { db, lt } from "@repo/db/drizzle";
+import { jobs } from "@repo/db/schema";
 
 // Delete all jobs from the database
 export async function GET(request: Request) {
@@ -14,14 +15,14 @@ export async function GET(request: Request) {
     //   );
     // }
 
-    // Delete all jobs from the database that are older than 1 month
-    await prisma.job.deleteMany({
-      where: {
-        createdAt: {
-          lte: new Date(new Date().setMonth(new Date().getMonth() - 1)), // Delete jobs created more than a month ago
-        },
-      },
-    });
+    // Get the current date and time
+    const oneMonthAgo = new Date();
+
+    // Set the date to one month ago
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    // Delete all jobs older than one month
+    await db.delete(jobs).where(lt(jobs.createdAt, oneMonthAgo));
 
     //  Return success response
     return Response.json(

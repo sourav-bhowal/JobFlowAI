@@ -1,10 +1,16 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import { sendJobsToQueue } from "../queue/producer.js";
 import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatJobs } from "../lib/FilterOldJobPost.js";
+import { filterAndFormatJobs } from "../lib/utils.js";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
+  console.log(`
+    ############################################
+    # 🚀 Starting Internshala Scraper...
+    ############################################
+  `);
+
   // Base URL for Internshala jobs
   const BASE_URL = "https://internshala.com/jobs/computer-science-jobs";
 
@@ -19,7 +25,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   // Go to the base URL
   await page.goto(BASE_URL, {
-    waitUntil: "domcontentloaded",
+    waitUntil: "networkidle2",
   });
 
   // Auto-scroll function to scroll down the page
@@ -87,7 +93,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     const jobPage: Page = await browser.newPage();
 
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle2",
     });
 
     const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
@@ -118,7 +124,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
-    currentPage <= Math.min(3, totalPages); // limit to 2 pages for now
+    currentPage <= Math.min(5, totalPages); // limit to 2 pages for now
     currentPage++
   ) {
     // Auto-scroll to load all jobs on the page

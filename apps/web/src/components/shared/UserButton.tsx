@@ -37,10 +37,10 @@ export default function UserButton({ loggedInUser }: { loggedInUser: User }) {
       >
         <Avatar className="h-8 w-8 border border-zinc-700">
           <AvatarImage src={loggedInUser.image!} alt={loggedInUser.username} />
-          <AvatarFallback className="bg-primary text-white">
+          <AvatarFallback className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white">
             {loggedInUser.username &&
-              loggedInUser
-                .username.split(" ")
+              loggedInUser.username
+                .split(" ")
                 .map((n) => n[0])
                 .join("")}
           </AvatarFallback>
@@ -75,16 +75,18 @@ export default function UserButton({ loggedInUser }: { loggedInUser: User }) {
                     src={loggedInUser.image!}
                     alt={loggedInUser.name!}
                   />
-                  <AvatarFallback className="bg-primary text-white">
+                  <AvatarFallback className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white">
                     {loggedInUser.username &&
-                      loggedInUser
-                        .username.split(" ")
+                      loggedInUser.username
+                        .split(" ")
                         .map((n) => n[0])
                         .join("")}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium text-white">{loggedInUser.username}</p>
+                  <p className="font-medium text-white">
+                    {loggedInUser.username}
+                  </p>
                   <p className="text-xs text-zinc-400">{loggedInUser.email}</p>
                 </div>
               </div>

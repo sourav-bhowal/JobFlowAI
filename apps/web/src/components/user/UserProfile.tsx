@@ -50,6 +50,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { SelectUserWithJobPreferences, JobType } from "@repo/db/schema";
+import { useQueryClient } from "@tanstack/react-query";
 
 // Interface for user data
 interface UserProfileProps {
@@ -67,6 +68,9 @@ export default function UserProfile({ user }: UserProfileProps) {
 
   // Router for navigation
   const router = useRouter();
+
+  // Import the query client from react-query
+  const queryClient = useQueryClient();
 
   // Animation variants for the container
   const containerVariants = {
@@ -183,6 +187,10 @@ export default function UserProfile({ user }: UserProfileProps) {
         toast.error(error);
       } else {
         setEditMode(false); // Disable edit mode
+        // Invalidate the queries to refetch the data
+        queryClient.invalidateQueries({
+          queryKey: ["jobs", "my-recommendations"],
+        });
         toast.success("Job preferences updated successfully");
         router.refresh(); // Refresh the page to show updated data
       }
@@ -334,7 +342,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                   className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 >
                   {/* About */}
-                  <Card className="bg-zinc-900 border-zinc-800 md:col-span-2">
+                  {/* <Card className="bg-zinc-900 border-zinc-800 md:col-span-2">
                     <CardHeader>
                       <CardTitle className="text-yellow-600">About</CardTitle>
                       <CardDescription>Tell us about yourself</CardDescription>
@@ -347,7 +355,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                         defaultValue={user?.bio!!}
                       />
                     </CardContent>
-                  </Card>
+                  </Card> */}
 
                   {/* Desired Roles */}
                   <Card className="bg-zinc-900 border-zinc-800">

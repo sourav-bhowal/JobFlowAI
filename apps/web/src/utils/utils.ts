@@ -34,11 +34,11 @@ export const areObjectsEqual = (obj1: any, obj2: any): boolean => {
 // Navigation links for the website
 export const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Find Jobs", href: "/jobs" },
-  { name: "Recommendations", href: "/contact" },
-  { name: "How It Works", href: "/blog" },
-  { name: "Testimonials", href: "/testimonials" },
-  { name: "FAQ", href: "/faq" },
+  { name: "Find Jobs", href: "#find-jobs" },
+  { name: "Recommendations", href: "#" },
+  { name: "How It Works", href: "#how-it-works" },
+  { name: "Testimonials", href: "#testimonials" },
+  { name: "FAQ", href: "#faq" },
 ];
 
 // Job type options for the form

@@ -1,6 +1,6 @@
 "use client";
 import InfiniteScrollContainer from "@/src/components/shared/InfiniteScrollContainer";
-import JobCardLoadingSkeleton from "@/src/components/shared/JobCardLoadingSkeleton";
+import { JobCardLoadingSkeletonSM } from "@/src/components/shared/JobCardLoadingSkeleton";
 import JobRecommendations from "@/src/components/user/JobCard";
 import { kyInstance } from "@/src/utils/ky";
 import { JobsPage } from "@/src/utils/utils";
@@ -29,7 +29,7 @@ export default function UserReccomendationsPage() {
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     retry: 3,
-    gcTime: 1000 * 60 * 5, // 5 minutes
+    // gcTime: 1000 * 60 * 5, // 5 minutes
   });
 
   // FLATTENING THE DATA
@@ -39,11 +39,7 @@ export default function UserReccomendationsPage() {
   if (status === "pending") {
     return (
       <div className="min-h-screen py-8 px-4 bg-black">
-        <div className="w-full h-10 bg-zinc-800 rounded-lg animate-pulse mb-6" />
-        <div className="flex flex-col gap-4">
-          <JobCardLoadingSkeleton />
-          <JobCardLoadingSkeleton />
-        </div>
+        <JobCardLoadingSkeletonSM />
       </div>
     );
   }

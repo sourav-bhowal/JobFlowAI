@@ -1,4 +1,4 @@
-import { internshalaJobScraper } from "@repo/scraper";
+import { internshalaJobScraper, naukriJobScraper } from "@repo/scraper";
 
 // Scraping function to be called by the cron job
 export async function GET(request: Request) {
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     // }
 
     // Scrape jobs from Internshala
-    await internshalaJobScraper();
+    await Promise.allSettled([internshalaJobScraper(), naukriJobScraper()]);
 
     // Return a success response
     return Response.json(
