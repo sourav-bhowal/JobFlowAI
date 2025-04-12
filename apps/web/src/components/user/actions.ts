@@ -10,7 +10,7 @@ import {
   UpdateJobPreferencesSchemaType,
 } from "@repo/validations/src/job-preference-validation";
 import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { sendWelcomeEmail } from "@repo/email";
 import {
   signUpSchema,

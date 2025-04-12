@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     // }
 
     // Scrape jobs from Internshala
-    await Promise.allSettled([internshalaJobScraper(), naukriJobScraper()]);
+    await Promise.all([internshalaJobScraper(), naukriJobScraper()]);
 
     // Return a success response
     return Response.json(

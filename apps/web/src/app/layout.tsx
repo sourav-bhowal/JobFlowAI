@@ -5,6 +5,7 @@ import { Toaster } from "@workspace/ui/components/sonner";
 import SessionContextProvider from "../context/SessionProvider";
 import NavBar from "../components/shared/NavBar";
 import ReactQueryProvider from "../context/QueryProvider";
+import Footer from "../components/shared/Footer";
 
 // Poppins is a Google Font that we are using in this example
 const poppins = Poppins({
@@ -35,6 +36,7 @@ export default function RootLayout({
           <body className={`${poppins.className} antialiased`}>
             <NavBar />
             {children}
+            <Footer />
             <Toaster />
           </body>
         </html>

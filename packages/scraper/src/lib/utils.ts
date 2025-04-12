@@ -51,7 +51,7 @@ export const filterAndFormatJobs = (jobs: SelectJob[]): SelectJob[] => {
       ...job,
       jobLink: job.jobLink?.startsWith("http")
         ? job.jobLink
-        : `https://internshala.com${job.jobLink}`,
+        : `https://www.internshala.com${job.jobLink}`,
     }));
 };
 

@@ -25,7 +25,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   // Go to the base URL
   await page.goto(BASE_URL, {
-    waitUntil: "networkidle2",
+    waitUntil: "domcontentloaded",
   });
 
   // Auto-scroll function to scroll down the page
@@ -93,7 +93,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     const jobPage: Page = await browser.newPage();
 
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
-      waitUntil: "networkidle2",
+      waitUntil: "domcontentloaded",
     });
 
     const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
@@ -124,7 +124,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
-    currentPage <= Math.min(5, totalPages); // limit to 2 pages for now
+    currentPage <= Math.min(2, totalPages); // limit to 2 pages for now
     currentPage++
   ) {
     // Auto-scroll to load all jobs on the page

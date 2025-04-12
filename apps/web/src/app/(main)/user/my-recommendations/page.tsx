@@ -28,8 +28,7 @@ export default function UserReccomendationsPage() {
         .json<JobsPage>(),
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    retry: 3,
-    // gcTime: 1000 * 60 * 5, // 5 minutes
+    retry: 5,
   });
 
   // FLATTENING THE DATA
@@ -44,20 +43,25 @@ export default function UserReccomendationsPage() {
     );
   }
 
+  // IF THERE ARE NO JOBS
   if (status === "success" && !jobs.length && !hasNextPage) {
     return (
-      <p className="text-center text-muted-foreground">
-        No jobs found. Please check back later.
-      </p>
+      <div className="min-h-screen py-8 px-4 bg-black">
+        <p className="text-center text-muted-foreground">
+          No job recommendations available. Please check back later.
+        </p>
+      </div>
     );
   }
 
   // IF THERE IS AN ERROR
   if (status === "error") {
     return (
-      <p className="text-center text-destructive">
-        An error occured while loading posts.
-      </p>
+      <div className="min-h-screen py-8 px-4 bg-black">
+        <p className="text-center text-destructive">
+          An error occured while loading posts.
+        </p>
+      </div>
     );
   }
 
