@@ -27,6 +27,7 @@
     "DATABASE_URL",
     "RABBITMQ_URL",
     "REDIS_HOST",
-    "REDIS_PORT"
+    "REDIS_PORT",
+    "OPENAI_API_KEY"
   ]
 }
