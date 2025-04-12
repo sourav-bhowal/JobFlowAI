@@ -1,6 +1,6 @@
 // Colors and styles for the welcome email template
 const welcomeEmailColors = {
-  primary: "#2563eb",
+  primary: "#EA580C",
   secondary: "#1e40af",
   background: "#f9fafb",
   text: "#374151",

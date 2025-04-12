@@ -104,7 +104,7 @@ export function Testimonials() {
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <Card
                 key={`${testimonial.id}-${index}`}
-                className="w-[350px] flex-shrink-0 bg-neutral-950 border-none"
+                className="w-[350px] flex-shrink-0 bg-zinc-900 border-none"
               >
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">

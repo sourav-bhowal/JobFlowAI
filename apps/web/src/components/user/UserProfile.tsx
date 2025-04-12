@@ -217,12 +217,12 @@ export default function UserProfile({ user }: UserProfileProps) {
                   {user.username.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <Button
+              {/* <Button
                 className="absolute bottom-0 right-0 bg-yellow-600 p-1.5 rounded-full border-2 border-zinc-900 hover:bg-yellow-700 transition-colors"
                 onClick={() => setEditMode(!editMode)}
               >
                 <Edit2 className="h-3.5 w-3.5" />
-              </Button>
+              </Button> */}
             </motion.div>
 
             <div className="flex-1">
@@ -242,7 +242,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                     className="text-zinc-400 flex items-center gap-2"
                   >
                     <Globe className="h-4 w-4 text-yellow-400" />
-                    {user.website}
+                    {user.username}
                   </motion.p>
                 </div>
 
@@ -261,7 +261,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                       }
                     }}
                     variant="outline"
-                    className="border-yellow-500 text-yellow-500 hover:bg-purple-500/10"
+                    className="bg-white/10 text-white hover:bg-white/20 border-orange-400 transition-colors flex items-center gap-2"
                   >
                     {!isPending ? (
                       editMode ? (
@@ -295,14 +295,14 @@ export default function UserProfile({ user }: UserProfileProps) {
                   <Mail className="h-4 w-4 text-yellow-400" />
                   <span>{user.email}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-zinc-400">
+                {/* <div className="flex items-center gap-2 text-sm text-zinc-400">
                   <Phone className="h-4 w-4 text-yellow-400" />
                   <span>{user.gitHub}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-zinc-400">
                   <MapPin className="h-4 w-4 text-yellow-400" />
                   <span>{user.twitter}</span>
-                </div>
+                </div> */}
               </motion.div>
             </div>
           </div>

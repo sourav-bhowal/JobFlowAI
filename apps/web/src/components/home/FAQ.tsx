@@ -7,6 +7,7 @@ import {
 } from "@workspace/ui/components/accordion";
 import { motion } from "framer-motion";
 
+// FAQSection Component
 export default function FAQSection() {
   return (
     <div className="w-full bg-neutral-950 text-white py-16" id="faq">
@@ -36,7 +37,7 @@ export default function FAQSection() {
 
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               How does JobNestAI's matching algorithm work?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
@@ -49,7 +50,7 @@ export default function FAQSection() {
           </AccordionItem>
 
           <AccordionItem value="item-2" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               Is JobNestAI free to use?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
@@ -62,7 +63,7 @@ export default function FAQSection() {
           </AccordionItem>
 
           <AccordionItem value="item-3" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               How often are new jobs added to the platform?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
@@ -75,7 +76,7 @@ export default function FAQSection() {
           </AccordionItem>
 
           <AccordionItem value="item-4" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               Can I use JobNestAI to find remote work?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
@@ -87,7 +88,7 @@ export default function FAQSection() {
           </AccordionItem>
 
           <AccordionItem value="item-5" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               How do I update my skills and preferences?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
@@ -100,7 +101,7 @@ export default function FAQSection() {
           </AccordionItem>
 
           <AccordionItem value="item-6" className="border-b border-gray-800">
-            <AccordionTrigger className="text-lg font-medium py-4 hover:text-primary">
+            <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
               What makes JobNestAI different from other job boards?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">

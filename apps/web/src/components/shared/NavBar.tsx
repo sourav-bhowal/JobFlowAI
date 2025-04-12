@@ -34,8 +34,7 @@ export default async function NavBar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-white hover:text-primary border-b-2 border-transparent hover:border-primary
-                  transition duration-300 ease-in-out"
+                    className="text-white hover:text-transparent transition duration-300 ease-in-out bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text"
                   >
                     {link.name}
                   </Link>

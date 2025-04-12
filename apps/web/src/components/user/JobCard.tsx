@@ -216,7 +216,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                   )}
                 </Button>
 
-                <Link href={job.jobLink!!}>
+                <Link href={job.jobLink!} target="_blank">
                   <Button
                     size="sm"
                     className={cn(

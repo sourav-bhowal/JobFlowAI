@@ -192,7 +192,7 @@ export default function Footer() {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex h-9 items-center justify-center rounded-md bg-[#FF8A00] px-4 py-2 text-sm font-medium shadow transition-colors hover:bg-[#FF8A00]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-9 items-center justify-center rounded-md bg-gradient-to-r from-yellow-600 to-orange-600 px-4 py-2 text-sm font-medium shadow transition-colors hover:bg-[#FF8A00]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 Contact Support
               </Link>
@@ -216,7 +216,7 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#FF8A00]"
               />
-              <button className="inline-flex h-10 items-center justify-center rounded-md bg-[#FF8A00] px-4 py-2 text-sm font-medium shadow transition-colors hover:bg-[#FF8A00]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring whitespace-nowrap">
+              <button className="inline-flex h-10 items-center justify-center rounded-md bg-gradient-to-r from-yellow-600 to-orange-600 px-4 py-2 text-sm font-medium shadow transition-colors hover:bg-[#FF8A00]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring whitespace-nowrap">
                 Subscribe
               </button>
             </div>

@@ -5,7 +5,10 @@ import HeroTiles from "./HeroTiles";
 // Hero Section
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center bg-neutral-950 px-4 py-20 text-center text-white">
+    <section className="relative flex min-h-screen flex-col items-center justify-center bg-neutral-950 px-4 py-20 text-center text-white overflow-hidden">
+      <div className="pointer-events-none absolute -top-20 -left-20 h-[400px] w-[400px] rounded-full bg-orange-500 opacity-10 blur-[120px]"></div>
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-orange-400 opacity-10 blur-[160px]"></div>
+      <div className="pointer-events-none absolute top-1/3 left-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-5 blur-[200px]"></div>
       <div className="container mx-auto max-w-5xl">
         {/* Logo/Brand */}
         <div className="mb-8 inline-block rounded-lg bg-gradient-to-r from-yellow-600 to-orange-600 p-[2px]">

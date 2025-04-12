@@ -65,7 +65,13 @@ export default function HowItWorks() {
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative">
           {/* Connecting Line (visible on desktop) */}
-          <div className="hidden md:block absolute top-[30px] left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-600 to-orange-600 z-0" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="hidden md:block absolute top-[30px] left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-600 to-orange-600 z-0"
+          />
 
           {steps.map((step, index) => (
             <motion.div
@@ -86,7 +92,7 @@ export default function HowItWorks() {
                 </motion.div>
 
                 {/* Step Icon (visible on mobile) */}
-                <div className="md:hidden bg-zinc-900 p-3 rounded-full mb-4">
+                <div className="md:hidden bg-gradient-to-r from-yellow-600/10 to-orange-600/10 text-orange-500 p-3 rounded-full mb-4">
                   {step.icon}
                 </div>
 
@@ -106,7 +112,7 @@ export default function HowItWorks() {
                 className="mt-6 bg-zinc-900 border border-zinc-800 rounded-lg p-6 hidden md:block"
               >
                 <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 mr-4">
+                  <div className="p-3 rounded-full bg-orange-500/10 text-orange-500 mr-4">
                     {step.icon}
                   </div>
                   <h4 className="font-semibold">{step.title}</h4>

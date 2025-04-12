@@ -35,7 +35,7 @@ export const areObjectsEqual = (obj1: any, obj2: any): boolean => {
 export const navLinks = [
   { name: "Home", href: "/" },
   { name: "Find Jobs", href: "#find-jobs" },
-  { name: "Recommendations", href: "#" },
+  { name: "Recommendations", href: "#recommendations" },
   { name: "How It Works", href: "#how-it-works" },
   { name: "Testimonials", href: "#testimonials" },
   { name: "FAQ", href: "#faq" },

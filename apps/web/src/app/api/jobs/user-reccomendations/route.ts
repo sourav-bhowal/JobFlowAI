@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { auth } from "../../auth/[...nextauth]/auth";
 import { User } from "next-auth";
 import { cosineDistance, db, sql } from "@repo/db/drizzle";
-import { jobs, SelectJob } from "@repo/db/schema";
+import { jobs } from "@repo/db/schema";
 import { JobsPage, JobWithMatch } from "@/src/utils/utils";
 
 // GET ROUTE FOR USER JOB RECOMMENDATIONS
