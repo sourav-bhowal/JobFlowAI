@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-      "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "node",
+    "module": "esnext"
   },
   "extends": "@repo/typescript-config/base.json"
 }

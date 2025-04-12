@@ -1,6 +1,6 @@
-import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatNaukriJobs } from "../lib/utils.js";
-import { sendJobsToQueue } from "../queue/producer.js";
+import { SelectJob } from "@repo/db/src/schema";
+import { filterAndFormatNaukriJobs } from "../lib/utils";
+import { sendJobsToQueue } from "../queue/producer";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 // Function to scrape jobs from Naukri

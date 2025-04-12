@@ -1,7 +1,7 @@
 import puppeteer, { Browser, Page } from "puppeteer";
-import { sendJobsToQueue } from "../queue/producer.js";
-import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatJobs } from "../lib/utils.js";
+import { sendJobsToQueue } from "../queue/producer";
+import { SelectJob } from "@repo/db/src/schema";
+import { filterAndFormatJobs } from "../lib/utils";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {

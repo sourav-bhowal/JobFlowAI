@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { WelcomeEmailTemplate } from "./components/welcome-email-template.js";
+import { WelcomeEmailTemplate } from "./components/welcome-email-template";
 import dotenv from "dotenv";
 import path from "path";
 

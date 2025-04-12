@@ -1,4 +1,4 @@
-import { SelectJob } from "@repo/db/schema";
+import { SelectJob } from "@repo/db/src/schema";
 
 // Function to check if a job was posted within the last 24 hours
 export const isPostedWithinLast24Hours = (postedAt: string): boolean => {

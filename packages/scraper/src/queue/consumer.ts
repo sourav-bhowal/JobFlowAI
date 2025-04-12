@@ -1,5 +1,5 @@
-import { insertJobInDB } from "../lib/insertJobInDB.js";
-import { QUEUE_NAME } from "./producer.js";
+import { insertJobInDB } from "../lib/insertJobInDB";
+import { QUEUE_NAME } from "./producer";
 import { connectRabbitMQ } from "@repo/rabbitmq";
 
 // Connect to RabbitMQ and consume jobs

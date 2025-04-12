@@ -11,7 +11,7 @@ import {
   Section,
   Hr,
 } from "@react-email/components";
-import { welcomeEmailStyles } from "../styles/welcome-email-styles.js";
+import { welcomeEmailStyles } from "../styles/welcome-email-styles";
 
 // Define the props type
 interface WelcomeEmailTemplateProps {
