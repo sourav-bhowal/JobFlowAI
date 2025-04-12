@@ -1,10 +1,10 @@
 "use server";
-import {
-  UpdateUserSchemaType,
-  updateUserSchema,
-  resetPasswordSchema,
-  ResetPasswordSchemaType,
-} from "@repo/validations/src/user-validation";
+// import {
+//   UpdateUserSchemaType,
+//   updateUserSchema,
+//   resetPasswordSchema,
+//   ResetPasswordSchemaType,
+// } from "@repo/validations/src/user-validation";
 import {
   updateJobPreferencesSchema,
   UpdateJobPreferencesSchemaType,

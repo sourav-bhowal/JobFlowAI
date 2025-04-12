@@ -17,5 +17,16 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "AUTH_SECRET",
+    "AUTH_URL",
+    "CRON_SECRET",
+    "NEXT_PUBLIC_BASE_URL",
+    "RESEND_API_KEY",
+    "DATABASE_URL",
+    "RABBITMQ_URL",
+    "REDIS_HOST",
+    "REDIS_PORT"
+  ]
 }

@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import {
   User,
   Mail,
-  Phone,
-  MapPin,
+  // Phone,
+  // MapPin,
   Edit2,
   Check,
   Settings,
@@ -36,7 +36,7 @@ import {
 } from "@workspace/ui/components/card";
 import { Separator } from "@workspace/ui/components/separator";
 import { Badge } from "@workspace/ui/components/badge";
-import { Textarea } from "@workspace/ui/components/textarea";
+// import { Textarea } from "@workspace/ui/components/textarea";
 import { useForm, zodResolver } from "@workspace/ui/hooks";
 import {
   updateJobPreferencesSchema,
