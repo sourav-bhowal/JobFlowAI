@@ -5,15 +5,15 @@ import { jobs } from "@repo/db/schema";
 export async function GET(request: Request) {
   try {
     // Headers check
-    // const authHeader = request.headers.get("Authorization");
+    const authHeader = request.headers.get("Authorization");
 
-    // // Check if header is valid
-    // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    //   return Response.json(
-    //     { error: "Invalid authorization header" },
-    //     { status: 401 }
-    //   );
-    // }
+    // Check if header is valid
+    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+      return Response.json(
+        { error: "Invalid authorization header" },
+        { status: 401 }
+      );
+    }
 
     // Get the current date and time
     const oneMonthAgo = new Date();
