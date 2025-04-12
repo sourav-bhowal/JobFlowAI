@@ -2,6 +2,7 @@ import { createJobEmbedding } from "../lib/jobEmbedding.js";
 import { jobs, SelectJob } from "@repo/db/schema";
 import { db } from "@repo/db/drizzle";
 
+// Function to insert jobs into the database
 export async function insertJobInDB(jobBatch: SelectJob[]) {
   try {
     if (!jobBatch || jobBatch.length === 0) {

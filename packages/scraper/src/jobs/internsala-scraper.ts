@@ -1,10 +1,16 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import { sendJobsToQueue } from "../queue/producer.js";
 import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatJobs } from "../lib/FilterOldJobPost.js";
+import { filterAndFormatJobs } from "../lib/utils.js";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
+  console.log(`
+    ############################################
+    # 🚀 Starting Internshala Scraper...
+    ############################################
+  `);
+
   // Base URL for Internshala jobs
   const BASE_URL = "https://internshala.com/jobs/computer-science-jobs";
 

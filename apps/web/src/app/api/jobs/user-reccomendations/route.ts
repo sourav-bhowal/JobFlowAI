@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     const cursorId = cursorIdStr ? Number(cursorIdStr) : null;
 
     // PAGE SIZE
-    const pageSize = 20;
+    const pageSize = 10;
 
     // Get session from auth
     const session = await auth();
@@ -54,29 +54,32 @@ export async function GET(request: NextRequest) {
     // Similarity function
     const similarity = sql`1 - (${cosineDistance(jobs.vector, userVector)})`;
 
+    // Threshold for similarity
+    const threshold = 0.56;
+
     // Retrieve jobs from DB
-    // 1. Selects all job fields plus the calculated similarity as "match_percentage"
-    // 2. If a cursor is provided, only selects jobs that come after the cursor position (for pagination)
-    // 3. Orders results by match_percentage (descending), then by job ID (descending)
-    // 4. Limits to pageSize + 1 results (the extra one is to determine if there are more pages)
-    const result = await db.execute(
-      sql<JobWithMatch[]>`
-        SELECT *, ${similarity} AS match_percentage
-        FROM ${jobs}
-        WHERE ${similarity} > 0.55
-        ${
-          cursorScore !== null && cursorId !== null
-            ? sql`
-                WHERE 
-                  (1 - (${cosineDistance(jobs.vector, userVector)}), jobs.id)
-                  < (${cursorScore}, ${cursorId})
-              `
-            : sql``
-        }
-        ORDER BY match_percentage DESC, ${jobs.id} DESC
-        LIMIT ${pageSize + 1}
-      `
-    );
+    let query = sql<JobWithMatch[]>`
+      SELECT *, ${similarity} AS match_percentage
+      FROM ${jobs}
+      WHERE ${similarity} > ${threshold}
+    `;
+
+    // Add pagination condition if cursor exists
+    if (cursorScore !== null && cursorId !== null) {
+      query = sql`
+        ${query} AND (${similarity}, ${jobs.id}) < (${cursorScore}, ${cursorId})
+      `;
+    }
+
+    // Add ordering and limit
+    query = sql`
+      ${query}
+      ORDER BY match_percentage DESC, ${jobs.id} DESC
+      LIMIT ${pageSize + 1}
+    `;
+
+    // Execute the query
+    const result = await db.execute(query);
 
     // Returns an empty jobs array and null cursor if no jobs were found.
     if (result.rows.length === 0) {
