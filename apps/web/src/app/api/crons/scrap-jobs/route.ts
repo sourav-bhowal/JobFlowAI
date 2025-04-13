@@ -1,4 +1,5 @@
-import { internshalaJobScraper, naukriJobScraper } from "@repo/scraper";
+import { internshalaJobScraper } from "@/src/lib/scraper/internsala-scraper";
+import { naukriJobScraper } from "@/src/lib/scraper/naukri-scraper";
 
 // Scraping function to be called by the cron job
 export async function GET(request: Request) {

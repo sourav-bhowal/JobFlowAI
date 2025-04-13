@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "start": "cd packages/scraper/src/queue && bun run consumer.ts"
+    "start:consumer": "cd apps/web/src/utils && bun run consumer.ts"
   },
   "devDependencies": {
     "prettier": "^3.5.3",

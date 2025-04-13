@@ -1,4 +1,4 @@
-import amqp, { type Channel, Connection } from "amqplib";
+import amqp from "amqplib";
 import dotenv from "dotenv";
 import path from "path";
 

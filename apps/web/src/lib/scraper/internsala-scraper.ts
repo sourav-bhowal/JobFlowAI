@@ -1,7 +1,10 @@
-import puppeteer, { Browser, Page } from "puppeteer";
+// import puppeteer, { Browser, Page } from "puppeteer";
 import { sendJobsToQueue } from "../queue/producer";
-import { SelectJob } from "@repo/db/src/schema";
-import { filterAndFormatJobs } from "../lib/utils";
+import { SelectJob } from "@repo/db/schema";
+import { filterAndFormatJobs } from "@/src/utils/utils";
+import { getBrowser } from "./browser";
+
+export const dynamic = "force-dynamic";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
@@ -15,13 +18,10 @@ export const internshalaJobScraper = async (): Promise<void> => {
   const BASE_URL = "https://internshala.com/jobs/computer-science-jobs";
 
   // Launch Puppeteer browser
-  const browser: Browser = await puppeteer.launch({
-    headless: false,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await getBrowser();
 
   // Open a new page
-  const page: Page = await browser.newPage();
+  const page = await browser.newPage();
 
   // Go to the base URL
   await page.goto(BASE_URL, {
@@ -90,7 +90,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   // Function to get job details from the job page
   const getJobDetails = async (jobUrl: string): Promise<Partial<SelectJob>> => {
-    const jobPage: Page = await browser.newPage();
+    const jobPage = await browser.newPage();
 
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
       waitUntil: "domcontentloaded",

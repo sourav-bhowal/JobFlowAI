@@ -1,5 +1,5 @@
 import { connectRabbitMQ } from "@repo/rabbitmq";
-import { SelectJob } from "@repo/db/src/schema";
+import { SelectJob } from "@repo/db/schema";
 
 // Queue name
 export const QUEUE_NAME = "jobQueue";

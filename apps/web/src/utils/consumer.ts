@@ -1,5 +1,5 @@
-import { insertJobInDB } from "../lib/insertJobInDB";
-import { QUEUE_NAME } from "./producer";
+import { insertJobInDB } from "./insertJobInDB";
+import { QUEUE_NAME } from "../lib/queue/producer";
 import { connectRabbitMQ } from "@repo/rabbitmq";
 
 // Connect to RabbitMQ and consume jobs

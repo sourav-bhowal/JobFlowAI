@@ -1,7 +1,9 @@
-import { SelectJob } from "@repo/db/src/schema";
-import { filterAndFormatNaukriJobs } from "../lib/utils";
+import { SelectJob } from "@repo/db/schema";
+import { filterAndFormatNaukriJobs } from "@/src/utils/utils";
 import { sendJobsToQueue } from "../queue/producer";
-import puppeteer, { Browser, Page } from "puppeteer";
+import { getBrowser } from "./browser";
+
+export const dynamic = "force-dynamic";
 
 // Function to scrape jobs from Naukri
 export const naukriJobScraper = async (): Promise<void> => {
@@ -15,13 +17,10 @@ export const naukriJobScraper = async (): Promise<void> => {
   const BASE_URL = "https://www.naukri.com/it-jobs";
 
   // Launch Puppeteer browser
-  const browser: Browser = await puppeteer.launch({
-    headless: false,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await getBrowser();
 
   // Open a new page
-  const page: Page = await browser.newPage();
+  const page = await browser.newPage();
 
   // Go to the Naukri IT jobs page
   await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
@@ -83,7 +82,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   // Function to get job details from the job link
   const getJobDetails = async (jobUrl: string): Promise<Partial<SelectJob>> => {
     // Open a new page for job details
-    const jobPage: Page = await browser.newPage();
+    const jobPage = await browser.newPage();
 
     // Navigate to the job URL
     await jobPage.goto(jobUrl, { waitUntil: "networkidle2", timeout: 60000 });

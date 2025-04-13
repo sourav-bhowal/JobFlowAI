@@ -1,5 +1,5 @@
 import { openai } from "@repo/openai";
-import { SelectJob } from "@repo/db/src/schema";
+import { SelectJob } from "@repo/db/schema";
 
 // Function to create job embeddings
 export async function createJobEmbedding(jobData: SelectJob[]) {
