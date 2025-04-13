@@ -34,7 +34,6 @@
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@repo/validations": "*",
-    "@repo/redis": "*",
     "@repo/email": "*",
     "@repo/db": "*",
     "@repo/ui": "*",
