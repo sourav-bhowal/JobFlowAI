@@ -1,42 +1,25 @@
-import { getToken } from "next-auth/jwt";
-import { NextResponse, NextRequest } from "next/server";
+import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
 
-// Middleware to protect routes
-export async function middleware(request: NextRequest) {
-  // Get the token from the request
-  const token = await getToken({
-    req: request,
-    secret: "secret123",
-  });
-
-  console.log("Token:", token);
-  console.log("Request URL:", request.url);
-  console.log("Request cookies:", request.cookies);
-
-  // Get the URL from the request
-  const url = request.nextUrl;
-
-  // If the token exists and the user is trying to access the sign-in or sign-up page, redirect to the home page
+export default auth((req) => {
   if (
-    token &&
-    (url.pathname.startsWith("/signin") || url.pathname.startsWith("/signup"))
+    !req.auth &&
+    (req.nextUrl.pathname.startsWith("/user") ||
+      req.nextUrl.pathname.startsWith("/jobs"))
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    const newUrl = new URL("/signin", req.nextUrl.origin);
+    return Response.redirect(newUrl);
   }
 
-  // If the token does not exist and the user is trying to access a protected route, redirect to the sign-in page
   if (
-    !token &&
-    (url.pathname.startsWith("/user") || url.pathname.startsWith("/jobs"))
+    req.auth &&
+    (req.nextUrl.pathname.startsWith("/signin") ||
+      req.nextUrl.pathname.startsWith("/signup"))
   ) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+    const newUrl = new URL("/", req.nextUrl.origin);
+    return Response.redirect(newUrl);
   }
+});
 
-  // Pass on the request if the user is authenticated or accessing public routes
-  return NextResponse.next();
-}
-
-// This middleware is used to protect the routes that require authentication
 export const config = {
-  matcher: ["/user/:path*", "/signin", "/signup", "/", "/jobs/:path*"],
+  matcher: ["/signin", "/signup", "/", "/jobs/:path*", "/user/:path*"],
 };
