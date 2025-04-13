@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { auth } from "../../auth/[...nextauth]/auth";
+import { auth } from "../../../../utils/auth";
 import { User } from "next-auth";
 import { cosineDistance, db, sql } from "@repo/db/drizzle";
 import { jobs } from "@repo/db/schema";

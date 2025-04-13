@@ -2,7 +2,7 @@ import { db } from "@repo/db/drizzle";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { SelectUserWithJobPreferences } from "@repo/db/schema";
-import { auth } from "../app/api/auth/[...nextauth]/auth";
+import { auth } from "./auth";
 import { User } from "next-auth";
 
 // Fetch User Data from cache

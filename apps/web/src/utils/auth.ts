@@ -1,8 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { signInSchema } from "@repo/validations/src/auth-validation";
-import bcrypt from "bcryptjs";
-import { db } from "@repo/db/drizzle";
 
 // NextAuth configuration
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -24,31 +21,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
 
       // The authorize method is used to check credentials
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials) {
         try {
-          // Parse the values using the SignIn schema
-          const { email, password } = signInSchema.parse(credentials);
+          const response = await fetch(
+            `${process.env.AUTH_URL}/api/user/signin`,
+            {
+              method: "POST",
+              body: JSON.stringify(credentials),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
-          // Check if the user exists
-          const user = await db.query.users.findFirst({
-            where: (users, { eq }) => eq(users.email, email),
-          });
+          // Check if the response is ok
+          const data = await response.json();
 
-          // If user does not exist, return an error
-          if (!user) {
-            return { error: "User not found" };
+          // Check if the response is ok
+          if (!response.ok) {
+            // If the response is not ok, throw an error
+            throw new Error(data.error || "Invalid credentials");
           }
 
-          // Compare the password
-          const passwordMatch = await bcrypt.compare(password, user.password);
-
-          // If password does not match, return an error
-          if (!passwordMatch) {
-            return { error: "Password does not match" };
-          }
-
-          // Return the user
-          return user;
+          // If the response is ok, return the user
+          return data;
         } catch (error) {
           // Return the error
           return { error: "An unexpected error occurred. Please try again." };

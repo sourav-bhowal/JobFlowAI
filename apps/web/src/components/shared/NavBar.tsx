@@ -2,7 +2,7 @@ import Link from "next/link";
 import { navLinks } from "@/src/utils/utils";
 import MobileNavBar from "./MobileNavBar";
 import UserButton from "./UserButton";
-import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/src/utils/auth";
 import { Button } from "@workspace/ui/components/button";
 import { User } from "next-auth";
 

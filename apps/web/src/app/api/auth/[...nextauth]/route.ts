@@ -1,2 +1,2 @@
-import { handlers } from "@/src/app/api/auth/[...nextauth]/auth";
+import { handlers } from "@/src/utils/auth";
 export const { GET, POST } = handlers;
