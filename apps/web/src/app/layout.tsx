@@ -6,6 +6,7 @@ import SessionContextProvider from "../context/SessionProvider";
 import NavBar from "../components/shared/NavBar";
 import ReactQueryProvider from "../context/QueryProvider";
 import Footer from "../components/shared/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 // Poppins is a Google Font that we are using in this example
 const poppins = Poppins({
@@ -38,6 +39,7 @@ export default function RootLayout({
             {children}
             <Footer />
             <Toaster />
+            <Analytics />
           </body>
         </html>
       </ReactQueryProvider>
