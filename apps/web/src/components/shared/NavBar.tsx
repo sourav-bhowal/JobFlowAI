@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navLinks } from "@/src/utils/utils";
+import { navLinks, protectedNavLinks } from "@/src/utils/utils";
 import MobileNavBar from "./MobileNavBar";
 import UserButton from "./UserButton";
 import { auth } from "@/src/utils/auth";
@@ -30,15 +30,25 @@ export default async function NavBar() {
           <div className="hidden xl:block">
             <div className="flex items-center">
               <div className="ml-10 flex items-center space-x-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-white hover:text-transparent transition duration-300 ease-in-out bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                {loggedInUser
+                  ? protectedNavLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-white hover:text-transparent transition duration-300 ease-in-out bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text"
+                      >
+                        {link.name}
+                      </Link>
+                    ))
+                  : navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-white hover:text-transparent transition duration-300 ease-in-out bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
               </div>
               <div className="ml-10 flex items-center space-x-4">
                 {loggedInUser ? (

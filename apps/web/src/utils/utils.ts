@@ -41,6 +41,13 @@ export const navLinks = [
   { name: "FAQ", href: "/#faq" },
 ];
 
+// Protected links
+export const protectedNavLinks = [
+  { name: "Profile", href: "/user/profile" },
+  // { name: "Jobs", href: "/jobs" },
+  { name: "Recommendations", href: "/user/my-recommendations" },
+];
+
 // Job type options for the form
 export const jobTypeOptions: { label: string; value: JobType }[] = [
   { label: "Full-time", value: "FULL_TIME" },
