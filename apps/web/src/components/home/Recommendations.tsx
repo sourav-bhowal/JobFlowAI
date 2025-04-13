@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // RecommendationSection Component
 const recommendations = [
   {
-    title: "Job Collection",
+    title: "Web Scrap Jobs",
     description:
       "We web scrap jobs from LinkedIn, Naukri, Internshala, Glassdoor, and more to provide comprehensive coverage.",
     icon: <Database className="h-6 w-6" />,

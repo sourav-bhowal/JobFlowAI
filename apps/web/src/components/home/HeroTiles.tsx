@@ -20,9 +20,9 @@ export default function HeroTiles() {
       {
         duration: 2,
         onUpdate: function () {
-          setPercentage(Math.round(this.progress() * 97)); // Set the percentage value to 97
-          setJobsDaily(Math.round(this.progress() * 1000)); // Set the jobs daily value to 1000
-          setFasterMatches(Math.round(this.progress() * 5)); // Set the faster matches value to 10
+          setPercentage(Math.round(this.progress() * 90)); // Set the percentage value to 97
+          setJobsDaily(Math.round(this.progress() * 100)); // Set the jobs daily value to 1000
+          setFasterMatches(Math.round(this.progress() * 3)); // Set the faster matches value to 10
         },
       }
     );

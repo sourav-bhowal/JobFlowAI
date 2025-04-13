@@ -5,6 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { navLinks } from "@/src/utils/utils";
 import Link from "next/link";
 import { gsap } from "gsap";
+import { useSession } from "next-auth/react";
+import { User } from "next-auth";
+import UserButton from "./UserButton";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@workspace/ui/components/avatar";
 
 export default function MobileNavBar() {
   // State to toggle the menu
@@ -15,6 +23,10 @@ export default function MobileNavBar() {
 
   // Toggle the menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const { data: session } = useSession();
+
+  const loggedInUser = session?.user as User;
 
   // Animation setup
   useEffect(() => {
@@ -51,7 +63,7 @@ export default function MobileNavBar() {
         <Button
           type="button"
           size={"icon"}
-          className="inline-flex items-center justify-center p-2 rounded-md text-neutral-900 focus:outline-none"
+          className="inline-flex bg-gradient-to-r from-yellow-600 to-orange-600 items-center justify-center p-2 rounded-md focus:outline-none"
           onClick={toggleMenu}
         >
           <span className="sr-only">Open main menu</span>
@@ -79,26 +91,58 @@ export default function MobileNavBar() {
               {link.name}
             </Link>
           ))}
-          <div className="flex space-x-4 p-4">
-            <Link href={"/signin"}>
-              <Button
-                onClick={toggleMenu}
-                size={"lg"}
-                className="bg-transparent border-2 border-primary font-semibold shadow-md hover:bg-transparent hover:shadow-primary transition-shadow duration-300 ease-in-out"
+          {loggedInUser ? (
+            <div className="flex items-center justify-between p-4">
+              <Link
+                href={"/user/profile"}
+                className="flex items-center space-x-3"
               >
-                SignIn
-              </Button>
-            </Link>
-            <Link href={"/signup"}>
-              <Button
-                onClick={toggleMenu}
-                size={"lg"}
-                className="text-neutral-900 font-semibold shadow-md hover:shadow-primary transition-shadow duration-300 ease-in-out"
-              >
-                SignUp
-              </Button>
-            </Link>
-          </div>
+                <Avatar className="h-10 w-10 border border-zinc-700">
+                  <AvatarImage
+                    src={loggedInUser.image!}
+                    alt={loggedInUser.username}
+                  />
+                  <AvatarFallback className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white">
+                    {loggedInUser.username &&
+                      loggedInUser.username
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-zinc-300 text-sm">
+                    {loggedInUser.username &&
+                      loggedInUser.username.split(" ")[0]}
+                  </p>
+                  <p className="text-muted-foreground text-xs">
+                    {loggedInUser.email}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex space-x-4 p-4">
+              <Link href={"/signin"}>
+                <Button
+                  onClick={toggleMenu}
+                  size={"lg"}
+                  className="bg-transparent border-2 border-yellow-600 font-semibold"
+                >
+                  SignIn
+                </Button>
+              </Link>
+              <Link href={"/signup"}>
+                <Button
+                  onClick={toggleMenu}
+                  size={"lg"}
+                  className="bg-gradient-to-r from-yellow-600 to-orange-600 font-semibold"
+                >
+                  SignUp
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>

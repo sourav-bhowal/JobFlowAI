@@ -247,12 +247,6 @@ export default function Footer() {
             >
               Cookies
             </Link>
-            <Link
-              href="/accessibility"
-              className="text-zinc-500 hover:text-[#FF8A00] text-sm transition-colors"
-            >
-              Accessibility
-            </Link>
           </div>
         </div>
       </div>
