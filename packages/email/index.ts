@@ -22,9 +22,9 @@ export const sendWelcomeEmail = async ({
 }: WelcomeEmailProps) => {
   // Send the email using the Resend client
   const { error, data } = await resend.emails.send({
-    from: "Job-Finder <welcome@souravbhowal.site>",
+    from: "JobNestAI <welcome@souravbhowal.site>",
     to: email,
-    subject: "Welcome to Job Finder",
+    subject: "Welcome to JobNestAI",
     react: await WelcomeEmailTemplate({ username }),
   });
 

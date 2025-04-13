@@ -29,7 +29,13 @@ export async function POST(request: Request) {
     }
 
     // Return the user
-    return Response.json(user, { status: 200 });
+    return Response.json(
+      {
+        user,
+        message: "User signed in successfully",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error in sign-in route:", error);
     // Handle error

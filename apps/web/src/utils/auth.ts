@@ -37,14 +37,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           // Check if the response is ok
           const data = await response.json();
 
-          // Check if the response is ok
-          if (!response.ok) {
-            // If the response is not ok, throw an error
-            throw new Error(data.error || "Invalid credentials");
+          // Get the user from the response
+          const user = data.user;
+
+          // If user found and response is ok, return the user
+          if (user) {
+            return user;
           }
 
-          // If the response is ok, return the user
-          return data;
+          // If user not found, return null
+          return null;
         } catch (error) {
           // Return the error
           return { error: "An unexpected error occurred. Please try again." };
