@@ -63,7 +63,7 @@ export default function UserButton({ loggedInUser }: { loggedInUser: User }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-60 origin-top-right rounded-md bg-zinc-900 border border-zinc-800 shadow-lg"
+            className="absolute right-0 mt-2 w-72 origin-top-right rounded-md bg-zinc-900 border border-zinc-800 shadow-lg"
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >

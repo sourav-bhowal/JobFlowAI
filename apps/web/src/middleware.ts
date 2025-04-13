@@ -9,6 +9,10 @@ export async function middleware(request: NextRequest) {
     secret: process.env.AUTH_SECRET,
   });
 
+  console.log("Token:", token);
+  console.log("Request URL:", request.url);
+  console.log("Request cookies:", request.cookies);
+
   // Get the URL from the request
   const url = request.nextUrl;
 
