@@ -1,14 +1,9 @@
 import { auth } from "@/src/app/api/auth/[...nextauth]/auth";
 
 export default auth((req) => {
-
   console.log("Middleware running...");
   console.log("Request URL:", req.nextUrl.pathname);
-  if (
-    !req.auth &&
-    (req.nextUrl.pathname.startsWith("/user") ||
-      req.nextUrl.pathname.startsWith("/jobs"))
-  ) {
+  if (!req.auth) {
     const newUrl = new URL("/signin", req.nextUrl.origin);
     return Response.redirect(newUrl);
   }
