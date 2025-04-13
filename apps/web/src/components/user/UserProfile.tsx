@@ -213,9 +213,9 @@ export default function UserProfile({ user }: UserProfileProps) {
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-full blur-sm opacity-70" />
               <Avatar className="h-24 w-24 border-4 border-zinc-900 relative">
-                <AvatarImage src={user.avatar!!} alt={user.username} />
+                <AvatarImage src={user.avatar!!} alt={user.username!!} />
                 <AvatarFallback className="text-2xl bg-gradient-to-r from-yellow-600 to-orange-600">
-                  {user.username.charAt(0).toUpperCase()}
+                  {user.username && user.username.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               {/* <Button
@@ -243,7 +243,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                     className="text-zinc-400 flex items-center gap-2"
                   >
                     <Globe className="h-4 w-4 text-yellow-400" />
-                    {user.username}
+                    {user.username!!}
                   </motion.p>
                 </div>
 
@@ -294,7 +294,7 @@ export default function UserProfile({ user }: UserProfileProps) {
               >
                 <div className="flex items-center gap-2 text-sm text-zinc-400">
                   <Mail className="h-4 w-4 text-yellow-400" />
-                  <span>{user.email}</span>
+                  <span>{user.email!!}</span>
                 </div>
                 {/* <div className="flex items-center gap-2 text-sm text-zinc-400">
                   <Phone className="h-4 w-4 text-yellow-400" />
