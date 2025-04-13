@@ -14,7 +14,8 @@ export const naukriJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Naukri IT jobs
-  const BASE_URL = "https://www.naukri.com/it-jobs";
+  // const BASE_URL = "https://www.naukri.com/it-jobs";
+  const BASE_URL = "https://www.naukri.com/jobs-in-india-5?functionAreaIdGid=8&jobAge=1";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -110,7 +111,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   };
 
   // Loop over 5 pages (or fewer if "Next" button disappears)
-  for (let currentPage = 1; currentPage <= 10; currentPage++) {
+  for (let currentPage = 1; currentPage <= 5; currentPage++) {
     // Auto-scroll to load more jobs
     await autoScroll();
 

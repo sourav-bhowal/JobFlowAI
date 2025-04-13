@@ -113,6 +113,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                         {(job.location === "Remote" ||
                           job.remote === true ||
                           job.location === "Work from Home" ||
+                          job.location === "Work from home" || 
                           job.location === "remote") && (
                           <Badge
                             variant="outline"

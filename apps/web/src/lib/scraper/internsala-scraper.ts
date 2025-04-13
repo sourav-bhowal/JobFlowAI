@@ -15,7 +15,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Internshala jobs
-  const BASE_URL = "https://internshala.com/jobs/computer-science-jobs";
+  const BASE_URL = "https://internshala.com/internships/computer-science-internship";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -25,7 +25,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   // Go to the base URL
   await page.goto(BASE_URL, {
-    waitUntil: "domcontentloaded",
+    waitUntil: "networkidle2",
   });
 
   // Auto-scroll function to scroll down the page
@@ -93,7 +93,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     const jobPage = await browser.newPage();
 
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle2",
     });
 
     const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
@@ -124,7 +124,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
-    currentPage <= Math.min(2, totalPages); // limit to 2 pages for now
+    currentPage <= Math.min(10, totalPages); // limit to 10 pages for now
     currentPage++
   ) {
     // Auto-scroll to load all jobs on the page
@@ -163,7 +163,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     if (isLastPage) break;
 
     // Wait for the next button to be clickable and click it
-    const nextButton = await page.$("#next");
+    const nextButton = await page.$("#navigation-forward");
     if (nextButton) {
       await nextButton.click();
       await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -171,7 +171,6 @@ export const internshalaJobScraper = async (): Promise<void> => {
       break;
     }
   }
-
   // Close the browser
   await browser.close();
 

@@ -59,7 +59,7 @@ export default function UserJobReccomendations() {
     return (
       <div className="min-h-screen py-8 px-4 bg-black">
         <p className="text-center text-destructive">
-          An error occured while loading posts.
+          An error occured while loading jobs.
         </p>
       </div>
     );
