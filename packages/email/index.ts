@@ -9,8 +9,6 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 // Initailize the Resend email client
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-console.log(process.env.RESEND_API_KEY);
-
 // Props for the welcome email
 interface WelcomeEmailProps {
   email: string;
