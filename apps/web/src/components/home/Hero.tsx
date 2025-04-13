@@ -10,6 +10,15 @@ export default function Hero() {
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-orange-400 opacity-10 blur-[160px]"></div>
       <div className="pointer-events-none absolute top-1/3 left-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-5 blur-[200px]"></div>
       <div className="container mx-auto max-w-5xl">
+        <div>
+          {/* Tagline */}
+          <div className="mb-4 inline-block rounded-full bg-gradient-to-r from-yellow-600/10 to-orange-600/10 px-3 py-1 text-sm text-orange-500">
+            {/* Pulsating dot */}
+            <span className="inline-block h-2 w-2 animate-pulse mr-1 rounded-full bg-orange-500"></span>
+            Beta Testing
+          </div>
+        </div>
+
         {/* Logo/Brand */}
         <div className="mb-8 inline-block rounded-lg bg-gradient-to-r from-yellow-600 to-orange-600 p-[2px]">
           <div className="rounded-lg bg-neutral-950 px-8 py-4">
@@ -40,14 +49,14 @@ export default function Hero() {
         {/* CTA Buttons */}
         <div className="mb-16 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
           <Link
-            href="#"
+            href="/user/my-recommendations"
             className="w-64 rounded-md bg-gradient-to-r from-yellow-600 to-orange-600 px-8 py-4 font-semibold shadow-md hover:shadow-orange-600 duration-500 hover:scale-105 transition-all ease-in-out"
           >
             Find Your Job Now
           </Link>
           <div className="w-64 rounded-md bg-gradient-to-r from-yellow-600 to-orange-600 p-[2px] shadow-md hover:shadow-orange-600 transition-shadow duration-500 ease-in-out">
             <Link
-              href="#"
+              href="#how-it-works"
               className="block rounded-md bg-neutral-950 px-8 py-4 font-semibold text-white"
             >
               How It Works

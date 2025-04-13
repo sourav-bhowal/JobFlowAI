@@ -2,7 +2,7 @@
 import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import {
-  User,
+  // User,
   Mail,
   // Phone,
   // MapPin,
@@ -12,6 +12,7 @@ import {
   LogOut,
   Globe,
   Loader2,
+  Sliders,
 } from "lucide-react";
 import {
   Avatar,
@@ -317,14 +318,14 @@ export default function UserProfile({ user }: UserProfileProps) {
               value="profile"
               className="data-[state=active]:bg-gradient-to-r from-yellow-600 to-orange-600 h-10 text-white"
             >
-              <User className="mr-2 h-4 w-4" />
-              Profile
+              <Sliders className="h-4 w-4" />
+              My Preferences
             </TabsTrigger>
             <TabsTrigger
               value="settings"
               className="data-[state=active]:bg-gradient-to-r from-yellow-600 to-orange-600 h-10 text-white"
             >
-              <Settings className="mr-2 h-4 w-4" />
+              <Settings className="h-4 w-4" />
               Settings
             </TabsTrigger>
           </TabsList>

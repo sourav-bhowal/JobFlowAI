@@ -2,6 +2,7 @@
 import { Button } from "@workspace/ui/components/button";
 import { motion } from "framer-motion";
 import { UserPlus, Sliders, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 // HowItWorks Component
 export default function HowItWorks() {
@@ -180,12 +181,14 @@ export default function HowItWorks() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex justify-center mt-16"
         >
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white px-8"
-          >
-            Get Started Now
-          </Button>
+          <Link href={"/user/my-recommendations"}>
+            <Button
+              size="lg"
+              className="bg-gradient-to-r shadow-md hover:shadow-orange-600 transition-shadow duration-500 ease-in-out from-yellow-600 to-orange-600 text-white px-8"
+            >
+              Get Started Now
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

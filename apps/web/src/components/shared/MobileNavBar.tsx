@@ -7,7 +7,6 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { useSession } from "next-auth/react";
 import { User } from "next-auth";
-import UserButton from "./UserButton";
 import {
   Avatar,
   AvatarFallback,
@@ -24,8 +23,10 @@ export default function MobileNavBar() {
   // Toggle the menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Get the session
   const { data: session } = useSession();
 
+  // Get the logged in user from the session
   const loggedInUser = session?.user as User;
 
   // Animation setup
@@ -96,6 +97,7 @@ export default function MobileNavBar() {
               <Link
                 href={"/user/profile"}
                 className="flex items-center space-x-3"
+                onClick={toggleMenu}
               >
                 <Avatar className="h-10 w-10 border border-zinc-700">
                   <AvatarImage

@@ -110,7 +110,10 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                       <div className="flex items-center">
                         <MapPin className="h-3.5 w-3.5 mr-1 text-yellow-500" />
                         <span>{job.location}</span>
-                        {job.remote && (
+                        {(job.location === "Remote" ||
+                          job.remote === true ||
+                          job.location === "Work from Home" ||
+                          job.location === "remote") && (
                           <Badge
                             variant="outline"
                             className="ml-2 bg-zinc-800 text-zinc-300 border-zinc-700 text-xs"
