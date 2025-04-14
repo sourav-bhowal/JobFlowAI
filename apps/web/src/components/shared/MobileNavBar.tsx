@@ -2,7 +2,7 @@
 import { Menu, X } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { useEffect, useRef, useState } from "react";
-import { navLinks } from "@/src/utils/utils";
+import { navLinks, protectedNavLinks } from "@/src/utils/utils";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useSession } from "next-auth/react";
@@ -82,16 +82,29 @@ export default function MobileNavBar() {
         style={{ display: "none", opacity: 0 }} // Initial closed state
       >
         <div className="flex flex-col">
-          {navLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="px-4 py-4 hover:text-primary transition duration-300 ease-in-out"
-              onClick={toggleMenu}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {/* Navigation links */}
+          {loggedInUser
+            ? protectedNavLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="px-4 py-4 hover:text-primary transition duration-300 ease-in-out"
+                  onClick={toggleMenu}
+                >
+                  {link.name}
+                </Link>
+              ))
+            : navLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="px-4 py-4 hover:text-primary transition duration-300 ease-in-out"
+                  onClick={toggleMenu}
+                >
+                  {link.name}
+                </Link>
+              ))}
+
           {loggedInUser ? (
             <div className="flex items-center justify-between p-4">
               <Link
