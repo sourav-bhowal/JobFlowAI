@@ -15,7 +15,8 @@ export const internshalaJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Internshala jobs
-  const BASE_URL = "https://internshala.com/internships/computer-science-internship";
+  const BASE_URL =
+    "https://internshala.com/internships/computer-science-internship";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -121,6 +122,9 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   console.log(`Total Pages: ${totalPages}`);
 
+  // Seen set to track unique job links
+  const seen = new Set<string>();
+
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
@@ -149,7 +153,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     );
 
     // Filter and format jobs
-    const filteredJobs = filterAndFormatJobs(jobsOnPage);
+    const filteredJobs = filterAndFormatJobs(jobsOnPage, seen);
 
     // Send page-wise jobs to queue
     await sendJobsToQueue(filteredJobs);

@@ -15,7 +15,8 @@ export const naukriJobScraper = async (): Promise<void> => {
 
   // Base URL for Naukri IT jobs
   // const BASE_URL = "https://www.naukri.com/it-jobs";
-  const BASE_URL = "https://www.naukri.com/jobs-in-india-5?functionAreaIdGid=8&jobAge=1";
+  const BASE_URL =
+    "https://www.naukri.com/jobs-in-india-5?functionAreaIdGid=8&jobAge=1";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -110,6 +111,9 @@ export const naukriJobScraper = async (): Promise<void> => {
     return details;
   };
 
+  // Seen set to track unique job links
+  const seen = new Set<string>();
+  
   // Loop over 5 pages (or fewer if "Next" button disappears)
   for (let currentPage = 1; currentPage <= 5; currentPage++) {
     // Auto-scroll to load more jobs
@@ -131,7 +135,7 @@ export const naukriJobScraper = async (): Promise<void> => {
     console.log(`Scraped Page ${currentPage}, Jobs: ${jobsOnPage.length}`);
 
     // Filter and format the jobs
-    const filteredJobs = filterAndFormatNaukriJobs(jobsOnPage);
+    const filteredJobs = filterAndFormatNaukriJobs(jobsOnPage, seen);
 
     // Send the filtered jobs to the queue
     await sendJobsToQueue(filteredJobs);

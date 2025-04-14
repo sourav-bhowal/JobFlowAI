@@ -257,9 +257,10 @@ export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
 };
 
 // Function to filter and format jobs
-export const filterAndFormatJobs = (jobs: SelectJob[]): SelectJob[] => {
-  const seen = new Set<string>();
-
+export const filterAndFormatJobs = (
+  jobs: SelectJob[],
+  seen: Set<string>
+): SelectJob[] => {
   return jobs
     .filter((job) => job.title && job.title.trim() !== "")
     .filter((job) => isPostedWithinLast24Hours(job.postedAt || ""))
@@ -278,9 +279,10 @@ export const filterAndFormatJobs = (jobs: SelectJob[]): SelectJob[] => {
 };
 
 // Function to filter and format jobs from Naukri
-export const filterAndFormatNaukriJobs = (jobs: SelectJob[]): SelectJob[] => {
-  const seen = new Set<string>();
-
+export const filterAndFormatNaukriJobs = (
+  jobs: SelectJob[],
+  seen: Set<string>
+): SelectJob[] => {
   return jobs
     .filter((job) => job.title && job.title.trim() !== "")
     .filter((job) => isPostedWithinLast24Hours(job.postedAt || ""))
