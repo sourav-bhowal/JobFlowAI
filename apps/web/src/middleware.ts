@@ -16,7 +16,8 @@ export default auth((req) => {
   if (
     req.auth &&
     (req.nextUrl.pathname.startsWith("/signin") ||
-      req.nextUrl.pathname.startsWith("/signup"))
+      req.nextUrl.pathname.startsWith("/signup") ||
+      req.nextUrl.pathname.startsWith("/"))
   ) {
     const newUrl = new URL("/user/profile", req.nextUrl.origin);
     return Response.redirect(newUrl);
