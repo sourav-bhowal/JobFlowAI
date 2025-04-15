@@ -30,7 +30,7 @@ export default function FAQSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-zinc-400 max-w-2xl mx-auto"
           >
-            Find answers to the most common questions about JobNestAI and how
+            Find answers to the most common questions about JobFlowAI and how
             our platform can help you find your perfect job match.
           </motion.p>
         </div>
@@ -38,7 +38,7 @@ export default function FAQSection() {
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1" className="border-b border-gray-800">
             <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
-              How does JobNestAI's matching algorithm work?
+              How does JobFlowAI's matching algorithm work?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
               Our AI engine analyzes thousands of data points from your profile,
@@ -51,10 +51,10 @@ export default function FAQSection() {
 
           <AccordionItem value="item-2" className="border-b border-gray-800">
             <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
-              Is JobNestAI free to use?
+              Is JobFlowAI free to use?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
-              JobNestAI offers a free basic tier that allows you to search and
+              JobFlowAI offers a free basic tier that allows you to search and
               apply for jobs. We also offer premium plans with advanced features
               like priority matching, direct employer messaging, and
               personalized career coaching. All plans come with our core AI
@@ -77,10 +77,10 @@ export default function FAQSection() {
 
           <AccordionItem value="item-4" className="border-b border-gray-800">
             <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
-              Can I use JobNestAI to find remote work?
+              Can I use JobFlowAI to find remote work?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
-              Absolutely! JobNestAI specializes in matching candidates with both
+              Absolutely! JobFlowAI specializes in matching candidates with both
               in-office and remote opportunities. You can filter your search
               preferences to focus exclusively on remote positions or hybrid
               arrangements based on your location preferences.
@@ -102,11 +102,11 @@ export default function FAQSection() {
 
           <AccordionItem value="item-6" className="border-b border-gray-800">
             <AccordionTrigger className="text-lg font-medium py-4 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text hover:text-transparent">
-              What makes JobNestAI different from other job boards?
+              What makes JobFlowAI different from other job boards?
             </AccordionTrigger>
             <AccordionContent className="text-gray-400 pb-4">
               Unlike traditional job boards that show the same listings to
-              everyone, JobNestAI uses advanced AI to personalize your job
+              everyone, JobFlowAI uses advanced AI to personalize your job
               search experience. Our platform learns your unique skills and
               preferences to deliver highly relevant opportunities, saving you
               time and increasing your chances of finding the perfect fit up to

@@ -18,7 +18,7 @@ export default async function NavBar() {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <span className="text-xl font-bold border-b-3 border-yellow-600">
-                JobNest
+                JobFlow
                 <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                   AI
                 </span>

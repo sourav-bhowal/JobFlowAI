@@ -1,5 +1,5 @@
 {
-  "name": "job-finder-new",
+  "name": "jobflowai",
   "private": true,
   "scripts": {
     "build": "turbo run build",

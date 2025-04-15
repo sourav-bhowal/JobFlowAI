@@ -28,11 +28,11 @@ export const WelcomeEmailTemplate: React.FC<
       <Container style={welcomeEmailStyles.container}>
         <Section style={welcomeEmailStyles.content}>
           <Heading style={welcomeEmailStyles.heading}>
-            Welcome to JobNestAI, {username}!
+            Welcome to JobFlowAI, {username}!
           </Heading>
 
           <Text style={welcomeEmailStyles.text}>
-            Thank you for joining JobNestAI! We're thrilled to have you as part
+            Thank you for joining JobFlowAI! We're thrilled to have you as part
             of our community. Our platform is designed to help you discover
             exciting career opportunities and connect with top employers in your
             field.
@@ -81,7 +81,7 @@ export const WelcomeEmailTemplate: React.FC<
           <Text style={welcomeEmailStyles.text}>
             Best regards,
             <br />
-            The JobNestAI Team
+            The JobFlowAI Team
           </Text>
 
           <div style={welcomeEmailStyles.socialLinks}>
@@ -99,7 +99,7 @@ export const WelcomeEmailTemplate: React.FC<
           </div>
 
           <Text style={welcomeEmailStyles.footer}>
-            © 2025 JobNestAI. All rights reserved.
+            © 2025 JobFlowAI. All rights reserved.
             <br />
             This is an automated message. Please do not reply to this email.
           </Text>

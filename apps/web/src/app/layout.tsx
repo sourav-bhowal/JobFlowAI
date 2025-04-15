@@ -17,10 +17,10 @@ const poppins = Poppins({
 // Metadata is a Next.js type that allows us to define metadata for the page
 export const metadata: Metadata = {
   title: {
-    template: "%s | JobNestAI",
-    default: "JobNestAI",
+    template: "%s | JobFlowAI",
+    default: "JobFlowAI",
   },
-  description: "JobNestAI is an AI powered job recommendation platform",
+  description: "JobFlowAI is an AI powered job recommendation platform",
 };
 
 // RootLayout is a layout component that wraps the entire application

@@ -18,7 +18,7 @@ export default function Footer() {
             <div className="flex items-center">
               <div>
                 <h2 className="text-2xl font-bold">
-                  <span className="text-white">JobNest</span>
+                  <span className="text-white">JobFlow</span>
                   <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                     AI
                   </span>
@@ -125,7 +125,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/blog"
+                  href="/career-blog"
                   className="text-zinc-400 hover:text-[#FF8A00] transition-colors text-sm"
                 >
                   Career Blog
@@ -147,28 +147,13 @@ export default function Footer() {
                   Interview Prep
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/salary-guide"
-                  className="text-zinc-400 hover:text-[#FF8A00] transition-colors text-sm"
-                >
-                  Salary Guide
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/career-advice"
                   className="text-zinc-400 hover:text-[#FF8A00] transition-colors text-sm"
                 >
                   Career Advice
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/job-market-trends"
-                  className="text-zinc-400 hover:text-[#FF8A00] transition-colors text-sm"
-                >
-                  Job Market Trends
                 </Link>
               </li>
             </ul>
@@ -181,7 +166,7 @@ export default function Footer() {
               <li className="flex items-start">
                 <Mail size={18} className="text-[#FF8A00] mr-2 mt-0.5" />
                 <span className="text-zinc-400 text-sm">
-                  support@jobnestai.com
+                  support@jobflowai.com
                 </span>
               </li>
               <li className="flex items-start">
@@ -201,7 +186,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter */}
-        <div className="border-t border-zinc-800 pt-8 pb-8">
+        {/* <div className="border-t border-zinc-800 pt-8 pb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div>
               <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
@@ -221,12 +206,12 @@ export default function Footer() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Bottom Footer */}
         <div className="border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-zinc-500 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} JobNestAI. All rights reserved.
+            © {new Date().getFullYear()} JobFlowAI. All rights reserved.
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link

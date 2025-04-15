@@ -15,7 +15,7 @@ export default function Hero() {
           <div className="mb-4 inline-block rounded-full bg-gradient-to-r from-yellow-600/10 to-orange-600/10 px-3 py-1 text-sm text-orange-500">
             {/* Pulsating dot */}
             <span className="inline-block h-2 w-2 animate-pulse mr-1 rounded-full bg-orange-500"></span>
-            Beta Testing
+            Early Access
           </div>
         </div>
 
@@ -23,7 +23,7 @@ export default function Hero() {
         <div className="mb-8 inline-block rounded-lg bg-gradient-to-r from-yellow-600 to-orange-600 p-[2px]">
           <div className="rounded-lg bg-neutral-950 px-8 py-4">
             <h1 className="md:text-5xl text-4xl font-bold">
-              JobNest
+              JobFlow
               <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
                 AI
               </span>

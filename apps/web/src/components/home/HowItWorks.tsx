@@ -58,7 +58,7 @@ export default function HowItWorks() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-zinc-400 max-w-2xl mx-auto"
           >
-            Getting started with JobNestAI is simple. Follow these three steps
+            Getting started with JobFlowAI is simple. Follow these three steps
             to find your dream job.
           </motion.p>
         </div>
