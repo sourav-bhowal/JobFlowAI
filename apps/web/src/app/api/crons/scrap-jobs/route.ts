@@ -1,3 +1,4 @@
+import { consumeJobsFromQueue } from "@/src/lib/queue/consumer";
 import { internshalaJobScraper } from "@/src/lib/scraper/internsala-scraper";
 import { naukriJobScraper } from "@/src/lib/scraper/naukri-scraper";
 
@@ -16,7 +17,11 @@ export async function GET(request: Request) {
     }
 
     // Scrape jobs from Internshala
-    await Promise.all([internshalaJobScraper(), naukriJobScraper()]);
+    await Promise.all([
+      internshalaJobScraper(),
+      naukriJobScraper(),
+      consumeJobsFromQueue(),
+    ]);
 
     // Return a success response
     return Response.json(

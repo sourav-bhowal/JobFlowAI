@@ -6,8 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "start:consumer": "cd src/utils && bun run consumer.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@sparticuz/chromium-min": "^133.0.0",
