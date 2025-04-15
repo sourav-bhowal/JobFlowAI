@@ -24,6 +24,11 @@ export const naukriJobScraper = async (): Promise<void> => {
   // Open a new page
   const page = await browser.newPage();
 
+  // Set user agent to mimic a real browser
+  await page.setUserAgent(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+  );
+
   // Go to the Naukri IT jobs page
   await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
 
@@ -113,7 +118,7 @@ export const naukriJobScraper = async (): Promise<void> => {
 
   // Seen set to track unique job links
   const seen = new Set<string>();
-  
+
   // Loop over 5 pages (or fewer if "Next" button disappears)
   for (let currentPage = 1; currentPage <= 5; currentPage++) {
     // Auto-scroll to load more jobs
