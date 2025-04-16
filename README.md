@@ -63,10 +63,10 @@ Go to the project directory
 cd JobFlowAI
 ```
 Put envs in .env file
-```
+```bash
 cd apps/web
 ```
-```
+```bash
 AUTH_SECRET=""
 AUTH_URL=""
 CRON_SECRET=""
@@ -77,14 +77,14 @@ DATABASE_URL=""
 RABBITMQ_URL=""
 ```
 Install the dependencies
-```
+```bash
 cd ../..
 ```
-```
+```bash
 bun install
 ```
 Run the frontend
-```
+```bash
 bun run dev
 ```
 
