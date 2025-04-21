@@ -40,7 +40,7 @@ export const WelcomeEmailTemplate: React.FC<
 
           <Text style={{ ...welcomeEmailStyles.text, textAlign: "center" }}>
             <Button
-              href="https://excalibur-fe.souravbhowal.site"
+              href="https://jobflowai.souravbhowal.site"
               style={welcomeEmailStyles.button}
             >
               Explore Opportunities

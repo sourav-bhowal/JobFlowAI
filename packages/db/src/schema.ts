@@ -15,6 +15,7 @@ import {
   relations,
 } from "drizzle-orm";
 
+// Enum for job types
 const JobTypeEnum = pgEnum("JobType", [
   "FULL_TIME",
   "PART_TIME",
@@ -22,6 +23,7 @@ const JobTypeEnum = pgEnum("JobType", [
   "INTERNSHIP",
 ]);
 
+// User table
 export const users = pgTable("users", {
   id: uuid().defaultRandom().primaryKey(),
   username: text("username").unique().notNull(),
