@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
     const similarity = sql`1 - (${cosineDistance(jobs.vector, userVector)})`;
 
     // Threshold for similarity
-    const threshold = 0.50;
+    const threshold = 0.55;
 
     // Retrieve jobs from DB
     let query = sql<JobWithMatch[]>`

@@ -113,7 +113,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                         {(job.location === "Remote" ||
                           job.remote === true ||
                           job.location === "Work from Home" ||
-                          job.location === "Work from home" || 
+                          job.location === "Work from home" ||
                           job.location === "remote") && (
                           <Badge
                             variant="outline"
@@ -333,11 +333,13 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                 className="overflow-hidden"
               >
                 <ul className="list-disc space-y-1 text-white text-xs pl-4">
-                  {formatDescription(job.description!!)
-                    .split("\n")
-                    .map((point, i) => (
-                      <li key={i}>{point.replace("• ", "")}</li>
-                    ))}
+                  <ul className="list-disc space-y-1 text-white text-xs pl-4">
+                    {formatDescription(job.description!!)
+                      .split("\n")
+                      .map((point, i) => (
+                        <li key={i}>{point.replace(/^•\s*/, "")}</li>
+                      ))}
+                  </ul>
                 </ul>
                 <Separator className="bg-zinc-800 my-3" />
               </motion.div>
@@ -383,8 +385,9 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
 // Function to format the job description
 function formatDescription(description: string): string {
   return description
-    .split(/\d+\.\s+/) // Split by "1. ", "2. ", etc.
-    .filter((line) => line.trim() !== "") // Remove empty strings
-    .map((line) => `• ${line.trim()}`) // Add bullet
-    .join("\n"); // Join with new lines
+    .split(/\d+\.\s+|(?<!\b(?:i|e|etc|vs|viz|no|al))\.\s+(?=[A-Z])|;/g) // smart splits
+    .map((line) => line.trim()) // trim each part
+    .filter((line) => line && line !== ".") // remove empty or dot-only lines
+    .map((line) => `• ${line}`) // bullet prefix
+    .join("\n");
 }

@@ -24,7 +24,6 @@ export async function insertJobInDB(jobBatch: SelectJob[]) {
       salaryFrequency: job.salaryFrequency,
       minSalary: job.minSalary,
       maxSalary: job.maxSalary,
-      remote: job.remote,
       insights: job.insights,
       applyLink: job.applyLink,
       applyBy: job.applyBy,
@@ -34,6 +33,12 @@ export async function insertJobInDB(jobBatch: SelectJob[]) {
       company: job.company,
       location: job.location,
       experience: job.experience,
+      remote:
+        job.location === "Remote" ||
+        job.location === "Work from Home" ||
+        job.location === "Work from home" ||
+        job.location === "remote" ||
+        job.remote,
       salary: job.salary,
       jobType: job.jobType,
       logo: job.logo,

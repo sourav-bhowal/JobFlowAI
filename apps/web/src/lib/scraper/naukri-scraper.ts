@@ -120,7 +120,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   const seen = new Set<string>();
 
   // Loop over 5 pages (or fewer if "Next" button disappears)
-  for (let currentPage = 1; currentPage <= 5; currentPage++) {
+  for (let currentPage = 1; currentPage <= 10; currentPage++) {
     // Auto-scroll to load more jobs
     await autoScroll();
 
