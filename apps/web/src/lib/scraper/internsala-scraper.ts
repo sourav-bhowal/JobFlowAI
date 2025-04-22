@@ -1,4 +1,3 @@
-// import puppeteer, { Browser, Page } from "puppeteer";
 import { sendJobsToQueue } from "../queue/producer";
 import { SelectJob } from "@repo/db/schema";
 import { filterAndFormatJobs } from "@/src/utils/utils";

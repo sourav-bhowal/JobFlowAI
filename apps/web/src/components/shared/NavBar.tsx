@@ -1,14 +1,15 @@
+"use client";
 import Link from "next/link";
 import { navLinks, protectedNavLinks } from "@/src/utils/utils";
 import MobileNavBar from "./MobileNavBar";
 import UserButton from "./UserButton";
-import { auth } from "@/src/utils/auth";
 import { Button } from "@workspace/ui/components/button";
 import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 
 // NavBar component
-export default async function NavBar() {
-  const session = await auth();
+export default function NavBar() {
+  const { data: session } = useSession();
   const loggedInUser = session?.user as User;
   return (
     <nav className="bg-black text-white w-full sticky top-0 z-50">
