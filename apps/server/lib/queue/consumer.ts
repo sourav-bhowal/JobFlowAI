@@ -1,5 +1,5 @@
-import { insertJobInDB } from "../../utils/insertJobInDB";
-import { QUEUE_NAME } from "./producer";
+import { insertJobInDB } from "../../utils/insertJobInDB.js";
+import { QUEUE_NAME } from "./producer.js";
 import { connectRabbitMQ } from "@repo/rabbitmq";
 
 // Connect to RabbitMQ and consume jobs
@@ -40,3 +40,6 @@ export const consumeJobsFromQueue = async () => {
     process.exit(1); // exit with failure
   }
 };
+
+// Call the consumer function to start consuming jobs
+consumeJobsFromQueue();

@@ -10,7 +10,7 @@ const remoteExecutablePath =
 export async function getBrowser() {
   if (browser) return browser;
 
-  const isProd = process.env.NEXT_PUBLIC_VERCEL_ENVIRONMENT === "production";
+  const isProd = process.env.NODE_ENV === "production";
 
   browser = isProd
     ? await puppeteerCore.launch({

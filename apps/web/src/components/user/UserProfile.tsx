@@ -290,7 +290,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4"
+                className="grid grid-cols-1 md:grid-cols-3 gap-4"
               >
                 <div className="flex items-center gap-2 text-sm text-zinc-400">
                   <Mail className="h-4 w-4 text-yellow-400" />

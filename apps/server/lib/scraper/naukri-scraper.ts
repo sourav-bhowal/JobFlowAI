@@ -1,7 +1,7 @@
 import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatNaukriJobs } from "@/src/utils/utils";
-import { sendJobsToQueue } from "../queue/producer";
-import { getBrowser } from "./browser";
+import { sendJobsToQueue } from "../queue/producer.js";
+import { getBrowser } from "./browser.js";
+import { filterAndFormatNaukriJobs } from "../../utils/filterAndFormatJobs.js";
 
 export const dynamic = "force-dynamic";
 

@@ -1,5 +1,5 @@
-import { createJobEmbedding } from "./jobEmbedding";
 import { jobs, SelectJob } from "@repo/db/schema";
+import { createJobEmbedding } from "./jobEmbedding.js";
 import { db } from "@repo/db/drizzle";
 
 // Function to insert jobs into the database

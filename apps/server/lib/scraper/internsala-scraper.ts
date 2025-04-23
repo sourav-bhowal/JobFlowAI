@@ -1,7 +1,7 @@
-import { sendJobsToQueue } from "../queue/producer";
+import { sendJobsToQueue } from "../queue/producer.js";
 import { SelectJob } from "@repo/db/schema";
-import { filterAndFormatJobs } from "@/src/utils/utils";
-import { getBrowser } from "./browser";
+import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
+import { getBrowser } from "./browser.js";
 
 export const dynamic = "force-dynamic";
 

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sparticuz/chromium-min": "^133.0.0",
     "@tanstack/react-query": "^5.72.2",
     "@tanstack/react-query-devtools": "^5.72.2",
     "@vercel/analytics": "^1.5.0",
@@ -19,8 +18,6 @@
     "ky": "^1.8.0",
     "next": "15.2.4",
     "next-auth": "^5.0.0-beta.25",
-    "puppeteer": "^24.6.1",
-    "puppeteer-core": "^24.6.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.16.0"
@@ -36,7 +33,6 @@
     "@repo/email": "*",
     "@repo/db": "*",
     "@repo/ui": "*",
-    "@repo/openai": "*",
-    "@repo/rabbitmq": "*"
+    "@repo/openai": "*"
   }
 }
