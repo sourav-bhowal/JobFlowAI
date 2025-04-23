@@ -8,7 +8,7 @@ import { consumeJobsFromQueue } from "./lib/queue/consumer.js";
 const app: Application = express();
 
 // PORT
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
 // Middleware
 app.use(express.json());
