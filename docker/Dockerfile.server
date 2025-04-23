@@ -1,9 +1,5 @@
 FROM oven/bun:1
 
-ENV DATABASE_URL = ${DATABASE_URL}
-ENV RABBITMQ_URL = ${RABBITMQ_URL}
-ENV OPENAI_API_KEY = ${OPENAI_API_KEY}
-
 WORKDIR /usr/src/app
 
 COPY ./packages ./packages
