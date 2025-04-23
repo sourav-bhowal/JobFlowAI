@@ -39,4 +39,9 @@ jobs:
             docker stop jobflowai_scraper_server
             docker rm jobflowai_scraper_server
             docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
-            docker run --name jobflowai_scraper_server -d -e DATABASE_URL=${{ secrets.DATABASE_URL }} -e RABBITMQ_URL=${{ secrets.RABBITMQ_URL }} -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} -p 8000:8000 souravbhowal/jobflowai_scraper_server:${{ github.sha }}
+            docker run --name jobflowai_scraper_server -d \
+                -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+                -e RABBITMQ_URL=${{ secrets.RABBITMQ_URL }} \
+                -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+                -p 8000:8000 \
+                souravbhowal/jobflowai_scraper_server:${{ github.sha }}
