@@ -33,15 +33,15 @@ consumeJobsFromQueue()
   });
 
 // Cron job to scrape jobs every day at 12:00 AM
-cron.schedule("0 0 * * *", async () => {
-  try {
-    console.log("Scraping jobs...");
+// cron.schedule("0 0 * * *", async () => {
+//   try {
+//     console.log("Scraping jobs...");
     await Promise.all([naukriJobScraper(), internshalaJobScraper()]);
-    console.log("Jobs scraped successfully!");
-  } catch (error) {
-    console.error("Error scraping jobs:", error);
-  }
-});
+//     console.log("Jobs scraped successfully!");
+//   } catch (error) {
+//     console.error("Error scraping jobs:", error);
+//   }
+// });
 
 // Start the server
 app.listen(PORT, () => {
