@@ -80,7 +80,7 @@ export default function AuthPage({ isSignIn }: AuthPageProps) {
           }
         } else {
           toast.success("Signed in successfully");
-          router.push("/user/profile");
+          router.refresh();
         }
       });
     } else {
