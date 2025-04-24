@@ -2,10 +2,7 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-COPY ./packages/db ./packages/db
-COPY ./packages/rabbitMQ ./packages/rabbitMQ
-COPY ./packages/openAI ./packages/openAI
-
+COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 
 COPY ./package.json ./package.json

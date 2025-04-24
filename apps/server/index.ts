@@ -33,27 +33,30 @@ consumeJobsFromQueue()
   });
 
 // Cron job to scrape jobs every day at 12:00 AM
-// cron.schedule("0 0 * * *", async () => {
-//   try {
-//     console.log("Scraping jobs...");
-const results = await Promise.allSettled([
-  naukriJobScraper(),
-  internshalaJobScraper(),
-]);
+cron.schedule("0 0 * * *", async () => {
+  try {
+    console.log("Scraping jobs...");
 
-for (const result of results) {
-  if (result.status === "fulfilled") {
-    console.log("Scraper success:", result.value);
-  } else {
-    console.error("Scraper failed:", result.reason);
+    // Call the scrapers for Naukri and Internshala
+    const results = await Promise.allSettled([
+      naukriJobScraper(),
+      internshalaJobScraper(),
+    ]);
+
+    // Handle the results of the scrapers
+    for (const result of results) {
+      if (result.status === "fulfilled") {
+        console.log("Scraper success:", result.value);
+      } else {
+        console.error("Scraper failed:", result.reason);
+      }
+    }
+
+    console.log("Jobs scraped successfully!");
+  } catch (error) {
+    console.error("Error scraping jobs:", error);
   }
-}
-
-//     console.log("Jobs scraped successfully!");
-//   } catch (error) {
-//     console.error("Error scraping jobs:", error);
-//   }
-// });
+});
 
 // Start the server
 app.listen(PORT, () => {
