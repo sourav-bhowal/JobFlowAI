@@ -3,8 +3,6 @@ import { SelectJob } from "@repo/db/schema";
 import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
 import { getBrowser } from "./browser.js";
 
-export const dynamic = "force-dynamic";
-
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
   console.log(`

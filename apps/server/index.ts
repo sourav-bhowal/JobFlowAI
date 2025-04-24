@@ -36,7 +36,19 @@ consumeJobsFromQueue()
 // cron.schedule("0 0 * * *", async () => {
 //   try {
 //     console.log("Scraping jobs...");
-    await Promise.all([naukriJobScraper(), internshalaJobScraper()]);
+const results = await Promise.allSettled([
+  naukriJobScraper(),
+  internshalaJobScraper(),
+]);
+
+for (const result of results) {
+  if (result.status === "fulfilled") {
+    console.log("Scraper success:", result.value);
+  } else {
+    console.error("Scraper failed:", result.reason);
+  }
+}
+
 //     console.log("Jobs scraped successfully!");
 //   } catch (error) {
 //     console.error("Error scraping jobs:", error);

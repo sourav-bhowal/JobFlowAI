@@ -13,12 +13,10 @@
     "@repo/db": "*",
     "@repo/openai": "*",
     "@repo/rabbitmq": "*",
-    "@sparticuz/chromium-min": "^133.0.0",
     "@types/express": "^5.0.1",
     "express": "^5.1.0",
     "node-cron": "^3.0.3",
-    "puppeteer": "^24.6.1",
-    "puppeteer-core": "^24.6.1"
+    "puppeteer": "^24.6.1"
   },
   "scripts": {
     "start": "bun run index.ts"

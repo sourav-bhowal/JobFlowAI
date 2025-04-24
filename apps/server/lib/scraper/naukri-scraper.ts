@@ -3,8 +3,6 @@ import { sendJobsToQueue } from "../queue/producer.js";
 import { getBrowser } from "./browser.js";
 import { filterAndFormatNaukriJobs } from "../../utils/filterAndFormatJobs.js";
 
-export const dynamic = "force-dynamic";
-
 // Function to scrape jobs from Naukri
 export const naukriJobScraper = async (): Promise<void> => {
   console.log(`
@@ -14,7 +12,6 @@ export const naukriJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Naukri IT jobs
-  // const BASE_URL = "https://www.naukri.com/it-jobs";
   const BASE_URL =
     "https://www.naukri.com/jobs-in-india-5?functionAreaIdGid=8&jobAge=1";
 
@@ -91,29 +88,51 @@ export const naukriJobScraper = async (): Promise<void> => {
     // Open a new page for job details
     const jobPage = await browser.newPage();
 
-    // Navigate to the job URL
-    await jobPage.goto(jobUrl, { waitUntil: "networkidle2", timeout: 60000 });
+    // Set user agent to mimic a real browser
+    await jobPage.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    );
 
-    // Wait for the job details to load
-    const details = await jobPage.evaluate(() => {
-      const descEl = document.querySelector(
-        ".styles_JDC__dang-inner-html__h0K4t"
-      );
-      const skillEls = Array.from(
-        document.querySelectorAll(".styles_key-skill__GIPn_ a span")
-      );
-
-      return {
-        description: descEl?.textContent?.trim() || "",
-        skills: skillEls.map((s) => s.textContent?.trim() || ""),
-      };
+    // Set Extra HTTP headers to mimic a real browser
+    await jobPage.setExtraHTTPHeaders({
+      "Accept-Language": "en-US,en;q=0.9",
     });
 
-    // Close the job details page
-    await jobPage.close();
+    // Go to the job URL
+    try {
+      const response = await jobPage.goto(jobUrl, {
+        waitUntil: "networkidle2",
+        timeout: 60000,
+      });
 
-    // Return the job details
-    return details;
+      // Check if the response is valid
+      if (!response || !response.ok()) {
+        console.warn(`❌ Failed to load ${jobUrl}: ${response?.status()}`);
+        return {};
+      }
+
+      // Wait for the job description to load
+      const details = await jobPage.evaluate(() => {
+        const descEl = document.querySelector(
+          ".styles_JDC__dang-inner-html__h0K4t"
+        );
+        const skillEls = Array.from(
+          document.querySelectorAll(".styles_key-skill__GIPn_ a span")
+        );
+
+        return {
+          description: descEl?.textContent?.trim() || "",
+          skills: skillEls.map((s) => s.textContent?.trim() || ""),
+        };
+      });
+
+      return details;
+    } catch (err) {
+      console.error(`🔥 Error fetching job details from ${jobUrl}:`, err);
+      return {};
+    } finally {
+      await jobPage.close();
+    }
   };
 
   // Seen set to track unique job links
