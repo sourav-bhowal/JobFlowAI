@@ -10,7 +10,7 @@ import puppeteer from "puppeteer";
 // export async function getBrowser() {
 //   if (browser) return browser;
 
-//   const isProd = process.env.NODE_ENV === "production";
+//   const isProd = process.env.BUN_ENV === "production";
 
 //   browser = isProd
 //     ? await puppeteerCore.launch({
@@ -29,7 +29,7 @@ import puppeteer from "puppeteer";
 export const getBrowser = async () => {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    headless: false,
+    headless: true,
   });
 
   return browser;

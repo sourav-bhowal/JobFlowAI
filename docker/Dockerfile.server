@@ -2,43 +2,10 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-# Install Chromium dependencies
-RUN apt-get update && apt-get install -y \
-    libx11-dev \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    libgbm-dev \
-    libasound2 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdrm2 \
-    libxss1 \
-    libgconf-2-4 \
-    libnss3 \
-    libxshmfence1 \
-    libgtk-3-0 \
-    libgdk-pixbuf2.0-0 \
-    libgobject-2.0-0 \
-    libglib2.0-0 \
-    libpangocairo-1.0-0 \
-    libpango-1.0-0 \
-    fonts-liberation \
-    libappindicator3-1 \
-    libcurl4 \
-    lsb-release \
-    wget \
-    ca-certificates \
-    --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+COPY ./packages/db ./packages/db
+COPY ./packages/rabbitMQ ./packages/rabbitMQ
+COPY ./packages/openAI ./packages/openAI
 
-# Optional: Set Puppeteer to skip download of bundled Chromium (if you want to use system Chromium or custom path)
-# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-
-COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 
 COPY ./package.json ./package.json
