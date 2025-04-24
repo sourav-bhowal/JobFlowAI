@@ -95,10 +95,17 @@ export const internshalaJobScraper = async (): Promise<void> => {
   const getJobDetails = async (jobUrl: string): Promise<Partial<SelectJob>> => {
     const jobPage = await browser.newPage();
 
+    // Set user agent to mimic a real browser
+    await jobPage.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    );
+
+    // Go to the job URL
     await jobPage.goto(`https://internshala.com${jobUrl}`, {
       waitUntil: "networkidle2",
     });
 
+    // Wait for the job details to load
     const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
       return {
         description:
@@ -109,8 +116,10 @@ export const internshalaJobScraper = async (): Promise<void> => {
       };
     });
 
+    // Close the job page
     await jobPage.close();
 
+    // Return the job details
     return jobDetails;
   };
 

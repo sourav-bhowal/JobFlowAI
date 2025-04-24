@@ -4,7 +4,7 @@ import puppeteer from "puppeteer";
 export const getBrowser = async () => {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    headless: false,
+    headless: true,
   });
 
   return browser;
