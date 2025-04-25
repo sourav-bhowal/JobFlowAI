@@ -2,6 +2,9 @@ name: Continuous Deployment (Scraper Server)
 on:
   push:
     branches: [main]
+
+    paths: 
+      - 'apps/server/**'
 jobs:
   build:
     runs-on: ubuntu-latest
