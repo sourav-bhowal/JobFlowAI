@@ -33,7 +33,7 @@ consumeJobsFromQueue()
   });
 
 // Cron job to scrape jobs every day at 12:00 AM
-cron.schedule("15 2 * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   try {
     console.log("Scraping jobs...");
 
