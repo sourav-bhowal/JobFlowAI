@@ -2,6 +2,7 @@ import { SelectJob } from "@repo/db/schema";
 import { sendJobsToQueue } from "../queue/producer.js";
 import { getBrowser } from "./browser.js";
 import { filterAndFormatNaukriJobs } from "../../utils/filterAndFormatJobs.js";
+import UserAgent from "user-agents";
 
 // Function to scrape jobs from Naukri
 export const naukriJobScraper = async (): Promise<void> => {
@@ -21,13 +22,24 @@ export const naukriJobScraper = async (): Promise<void> => {
   // Open a new page
   const page = await browser.newPage();
 
+  // Generate a random user agent
+  const userAgent = new UserAgent({ deviceCategory: "desktop" });
+
   // Set user agent to mimic a real browser
   await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    userAgent.toString() ||
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
   );
 
   // Go to the Naukri IT jobs page
-  await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
+  try {
+    await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
+  } catch (err) {
+    // If the page fails to load, log the error and close the browser
+    console.error("❌ Failed to load base page:", err);
+    await browser.close();
+    return;
+  }
 
   // Auto-scroll function to scroll down the page
   const autoScroll = async (): Promise<void> => {
@@ -167,10 +179,13 @@ export const naukriJobScraper = async (): Promise<void> => {
     // Navigate to the next page
     const nextButton = await page.$("#lastCompMark > a:nth-child(4)");
 
-    // Check if the "Next" button is available and click it
+    // Check if the "Next" button is available and click it if it is
     if (nextButton) {
-      await nextButton.click();
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await Promise.all([
+        // Wait for the next page to load after clicking the button
+        page.waitForNavigation({ waitUntil: "networkidle2", timeout: 30000 }),
+        nextButton.click(),
+      ]);
     } else {
       console.log("No more pages found.");
       break;
