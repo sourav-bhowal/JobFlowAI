@@ -39,7 +39,7 @@ cron.schedule("0 0 * * *", async () => {
 
     // Call the scrapers for Naukri and Internshala
     const results = await Promise.allSettled([
-      naukriJobScraper(),
+      // naukriJobScraper(),
       internshalaJobScraper(),
     ]);
 
