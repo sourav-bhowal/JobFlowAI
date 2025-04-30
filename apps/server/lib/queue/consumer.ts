@@ -40,6 +40,3 @@ export const consumeJobsFromQueue = async () => {
     process.exit(1); // exit with failure
   }
 };
-
-// Call the consumer function to start consuming jobs
-consumeJobsFromQueue();

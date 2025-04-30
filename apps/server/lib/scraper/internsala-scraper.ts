@@ -133,9 +133,6 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   console.log(`Total Pages: ${totalPages}`);
 
-  // Seen set to track unique job links
-  const seen = new Set<string>();
-
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
@@ -164,7 +161,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     );
 
     // Filter and format jobs
-    const filteredJobs = filterAndFormatJobs(jobsOnPage, seen);
+    const filteredJobs = await filterAndFormatJobs(jobsOnPage, "internshala");
 
     // Send page-wise jobs to queue
     await sendJobsToQueue(filteredJobs);

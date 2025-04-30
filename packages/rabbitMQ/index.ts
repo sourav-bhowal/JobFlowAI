@@ -5,7 +5,7 @@ import path from "path";
 // Load the environment variables
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL
+const RABBITMQ_URL = process.env.RABBITMQ_URL;
 
 if (!RABBITMQ_URL) {
   throw new Error("RABBITMQ_URL is not defined in .env file");

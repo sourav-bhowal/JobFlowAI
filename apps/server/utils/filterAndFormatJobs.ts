@@ -1,4 +1,5 @@
 import { SelectJob } from "@repo/db/schema";
+import { redisClient } from "@repo/redis";
 
 // Function to check if a job was posted within the last 24 hours
 export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
@@ -34,40 +35,46 @@ export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
   return diff <= 1000 * 60 * 60 * 24; // within 24 hours
 };
 
-// Function to filter and format jobs
-export const filterAndFormatJobs = (
+// Function to filter and format jobs from Naukri and Internshala
+export const filterAndFormatJobs = async (
   jobs: SelectJob[],
-  seen: Set<string>
-): SelectJob[] => {
-  return jobs
-    .filter((job) => job.title && job.title.trim() !== "")
-    .filter((job) => isPostedWithinLast24Hours(job.postedAt || ""))
-    .filter((job) => {
-      const key = `${job.title?.trim().toLowerCase()}|${job.company?.trim().toLowerCase()}|${job.location?.trim().toLowerCase()}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .map((job) => ({
-      ...job,
-      jobLink: job.jobLink?.startsWith("http")
-        ? job.jobLink
-        : `https://www.internshala.com${job.jobLink}`,
-    }));
-};
+  source: "naukri" | "internshala"
+): Promise<SelectJob[]> => {
+  // Array of unique jobs to be returned
+  const results: SelectJob[] = [];
 
-// Function to filter and format jobs from Naukri
-export const filterAndFormatNaukriJobs = (
-  jobs: SelectJob[],
-  seen: Set<string>
-): SelectJob[] => {
-  return jobs
-    .filter((job) => job.title && job.title.trim() !== "")
-    .filter((job) => isPostedWithinLast24Hours(job.postedAt || ""))
-    .filter((job) => {
-      const key = `${job.title?.trim().toLowerCase()}|${job.company?.trim().toLowerCase()}|${job.location?.trim().toLowerCase()}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
+  // Check if jobs are empty or undefined then return empty array
+  for (const job of jobs) {
+    if (!job.title?.trim() || !isPostedWithinLast24Hours(job.postedAt || "")) {
+      continue;
+    }
+
+    // Key to check for duplicates
+    const key = `${source}:${job.title.trim().toLowerCase()}|${job.company?.trim().toLowerCase()}|${job.location?.trim().toLowerCase()}`;
+
+    // Check if the job has already been seen
+    const isDuplicate = await redisClient.sismember("seen_jobs", key);
+
+    // If the job is not a duplicate, add it to the results
+    if (!isDuplicate) {
+      await redisClient.sadd("seen_jobs", key);
+
+      // Normalize job link if needed
+      const finalJob = {
+        ...job,
+        jobLink:
+          source === "internshala" &&
+          job.jobLink &&
+          !job.jobLink.startsWith("http")
+            ? `https://www.internshala.com${job.jobLink}`
+            : job.jobLink,
+      };
+
+      // Add the job to the results array
+      results.push(finalJob);
+    }
+  }
+
+  // Return the filtered and formatted jobs
+  return results;
 };

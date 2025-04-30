@@ -1,8 +1,8 @@
 import { SelectJob } from "@repo/db/schema";
 import { sendJobsToQueue } from "../queue/producer.js";
 import { getBrowser } from "./browser.js";
-import { filterAndFormatNaukriJobs } from "../../utils/filterAndFormatJobs.js";
 import UserAgent from "user-agents";
+import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
 
 // Function to scrape jobs from Naukri
 export const naukriJobScraper = async (): Promise<void> => {
@@ -13,8 +13,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Naukri IT jobs
-  const BASE_URL =
-    "https://www.naukri.com/jobs-in-india-5?functionAreaIdGid=8&jobAge=1";
+  const BASE_URL = "https://www.naukri.com/jobs-in-india?jobAge=1";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -23,7 +22,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   const page = await browser.newPage();
 
   // Generate a random user agent
-  const userAgent = new UserAgent({ deviceCategory: "desktop" });
+  const userAgent = new UserAgent();
 
   // Set user agent to mimic a real browser
   await page.setUserAgent(
@@ -102,7 +101,8 @@ export const naukriJobScraper = async (): Promise<void> => {
 
     // Set user agent to mimic a real browser
     await jobPage.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+      userAgent.toString() ||
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
     );
 
     // Set Extra HTTP headers to mimic a real browser
@@ -147,9 +147,6 @@ export const naukriJobScraper = async (): Promise<void> => {
     }
   };
 
-  // Seen set to track unique job links
-  const seen = new Set<string>();
-
   // Loop over 5 pages (or fewer if "Next" button disappears)
   for (let currentPage = 1; currentPage <= 10; currentPage++) {
     // Auto-scroll to load more jobs
@@ -171,7 +168,7 @@ export const naukriJobScraper = async (): Promise<void> => {
     console.log(`Scraped Page ${currentPage}, Jobs: ${jobsOnPage.length}`);
 
     // Filter and format the jobs
-    const filteredJobs = filterAndFormatNaukriJobs(jobsOnPage, seen);
+    const filteredJobs = await filterAndFormatJobs(jobsOnPage, "naukri");
 
     // Send the filtered jobs to the queue
     await sendJobsToQueue(filteredJobs);

@@ -12,6 +12,7 @@
   "dependencies": {
     "@repo/db": "*",
     "@repo/openai": "*",
+    "@repo/redis": "*",
     "@repo/rabbitmq": "*",
     "@types/express": "^5.0.1",
     "@types/user-agents": "^1.0.4",

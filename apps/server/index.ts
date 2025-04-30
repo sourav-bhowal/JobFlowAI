@@ -15,12 +15,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(200).send("Server is running!!");
-});
-
-// Health check route
-app.get("/health", (req, res) => {
-  res.status(200).send("OK");
+  res.status(200).send("Server is running!! All Systems OK!!!");
 });
 
 // Start consuming jobs from the queue
@@ -32,14 +27,14 @@ consumeJobsFromQueue()
     console.error("Error starting consumer:", error);
   });
 
-// Cron job to scrape jobs every day at 12:00 AM
-cron.schedule("0 0 * * *", async () => {
+// Cron job to scrape jobs every 6 hours
+cron.schedule("0 */6 * * *", async () => {
   try {
     console.log("Scraping jobs...");
 
     // Call the scrapers for Naukri and Internshala
     const results = await Promise.allSettled([
-      // naukriJobScraper(),
+      naukriJobScraper(),
       internshalaJobScraper(),
     ]);
 
