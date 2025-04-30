@@ -46,5 +46,6 @@ jobs:
                 -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
                 -e RABBITMQ_URL=${{ secrets.RABBITMQ_URL }} \
                 -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+                -e REDIS_URL=${{ secrets.REDIS_URL }} \
                 -p 8000:8000 \
                 souravbhowal/jobflowai_scraper_server:${{ github.sha }}

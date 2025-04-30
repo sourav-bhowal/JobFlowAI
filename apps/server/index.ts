@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(200).send("Server is running!! All Systems OK!!!");
+  res.status(200).send("Scraper Server is running!! All Systems OK!!!");
 });
 
 // Start consuming jobs from the queue
