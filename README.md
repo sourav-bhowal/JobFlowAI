@@ -45,6 +45,10 @@ JobFlow AI goes beyond traditional keyword matching. By using AI and similarity 
 
 **Zod**
 
+**Github Actions**
+
+**CI/CD**
+
 
 ## Screenshots
 
