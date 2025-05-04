@@ -25,8 +25,6 @@ JobFlow AI goes beyond traditional keyword matching. By using AI and similarity 
 
 **Puppeteer**
 
-**BcryptJs**
-
 **Gsap**
 
 **Framer Motion**
@@ -40,6 +38,8 @@ JobFlow AI goes beyond traditional keyword matching. By using AI and similarity 
 **Open AI**
 
 **Rabbit MQ**
+
+**Redis**
 
 **ShadCN UI**
 
