@@ -193,7 +193,7 @@ export const naukriJobScraper = async (): Promise<void> => {
   await browser.close();
   console.log(`
     ############################################
-    # ✅ Naukri Scraping Complete!
+    # ✅ Naukri Scraping Complete!!
     # 📄 Jobs scraped and queued.
     ############################################
   `);
