@@ -136,7 +136,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   // Loop through the pages to scrape jobs
   for (
     let currentPage = 1;
-    currentPage <= Math.min(10, totalPages); // limit to 10 pages for now
+    currentPage <= Math.min(5, totalPages); // limit to 10 pages for now
     currentPage++
   ) {
     // Auto-scroll to load all jobs on the page
