@@ -2,7 +2,7 @@ name: Continuous Deployment (Scraper Server)
 on:
   push:
     branches: [main]
-
+    # Only trigger on changes to the server code
     paths: 
       - 'apps/server/**'
 jobs:
@@ -41,7 +41,9 @@ jobs:
             docker stop jobflowai_scraper_server
             docker rm jobflowai_scraper_server
             docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
+            docker image prune -f
             docker run --name jobflowai_scraper_server -d \
+                --restart unless-stopped \
                 -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
                 -e RABBITMQ_URL=${{ secrets.RABBITMQ_URL }} \
                 -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
