@@ -40,8 +40,8 @@ jobs:
           script: |
             docker stop jobflowai_scraper_server
             docker rm jobflowai_scraper_server
-            docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
             docker image prune -f
+            docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
             docker run --name jobflowai_scraper_server -d \
                 --restart unless-stopped \
                 -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
