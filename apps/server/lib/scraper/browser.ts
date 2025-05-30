@@ -9,7 +9,7 @@ export const getBrowser = async () => {
   // @ts-ignore
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-http2"],
-    headless: false,
+    headless: true,
   });
 
   return browser;
