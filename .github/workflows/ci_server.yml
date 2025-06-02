@@ -43,7 +43,6 @@ jobs:
             docker image prune -f
             docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
             docker run --name jobflowai_scraper_server -d \
-                --restart unless-stopped \
                 -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
                 -e RABBITMQ_URL=${{ secrets.RABBITMQ_URL }} \
                 -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
