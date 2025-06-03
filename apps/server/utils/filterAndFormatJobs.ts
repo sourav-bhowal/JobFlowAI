@@ -55,9 +55,10 @@ export const filterAndFormatJobs = async (
     // Check if the job has already been seen
     const isDuplicate = await redisClient.sismember("seen_jobs", key);
 
-    // If the job is not a duplicate, add it to the results
+    // If the job is not a duplicate, add it to the results and expire the key after 7 days
     if (!isDuplicate) {
       await redisClient.sadd("seen_jobs", key);
+      await redisClient.expire(key, 60 * 60 * 24 * 7); // 7 days
 
       // Normalize job link if needed
       const finalJob = {
