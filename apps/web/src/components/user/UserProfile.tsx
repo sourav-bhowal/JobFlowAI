@@ -52,6 +52,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { SelectUserWithJobPreferences, JobType } from "@repo/db/schema";
 import { useQueryClient } from "@tanstack/react-query";
+import { containerVariants, itemVariants } from "@/src/utils/variants";
 
 // Interface for user data
 interface UserProfileProps {
@@ -72,27 +73,6 @@ export default function UserProfile({ user }: UserProfileProps) {
 
   // Import the query client from react-query
   const queryClient = useQueryClient();
-
-  // Animation variants for the container
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  // Animation variants for individual items
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
-    },
-  };
 
   // Form
   const { handleSubmit, watch, setValue } =

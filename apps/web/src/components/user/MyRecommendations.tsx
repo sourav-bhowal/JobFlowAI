@@ -1,7 +1,7 @@
 "use client";
 import InfiniteScrollContainer from "@/src/components/shared/InfiniteScrollContainer";
 import { JobCardLoadingSkeletonSM } from "@/src/components/shared/JobCardLoadingSkeleton";
-import JobRecommendations from "@/src/components/user/JobCard";
+import JobCard from "@/src/components/user/JobCard";
 import { kyInstance } from "@/src/utils/ky";
 import { JobsPage } from "@/src/utils/utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -80,7 +80,7 @@ export default function MyRecommendations() {
           onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
         >
           {jobs.map((job) => (
-            <JobRecommendations key={job.id} job={job} />
+            <JobCard key={job.id} job={job} />
           ))}
           {isFetchingNextPage && (
             <Loader2 className="mx-auto my-3 animate-spin text-white" />

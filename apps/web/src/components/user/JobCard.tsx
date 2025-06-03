@@ -31,13 +31,17 @@ import { Button } from "@workspace/ui/components/button";
 import { Progress } from "@workspace/ui/components/progress";
 import { JobWithMatch } from "@/src/utils/utils";
 import Link from "next/link";
+import { itemVariants } from "@/src/utils/variants";
+import { containerVariants } from "@/src/utils/variants";
 
-interface JobRecommendationsProps {
+// Job Card Component Props
+interface JobCardProps {
   job: JobWithMatch;
 }
 
-export default function JobRecommendations({ job }: JobRecommendationsProps) {
-  // State
+// Job Card Component
+export default function JobCard({ job }: JobCardProps) {
+  // State for job card expansion state
   const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
 
   // Function to Expand Job
@@ -49,26 +53,6 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
-    },
-  };
-
   return (
     <>
       <motion.div
@@ -77,6 +61,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
         animate="visible"
         className="space-y-6 max-sm:hidden"
       >
+        {/* Desktop Job Card */}
         <motion.div key={job.id} variants={itemVariants}>
           <Card
             className={cn(
@@ -99,7 +84,14 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="text-lg font-semibold text-white">
-                        {job.title}
+                        {job.title.includes("-") || job.title.includes("(")
+                          ? job.title.slice(
+                              0,
+                              job.title.indexOf("-") > -1
+                                ? job.title.indexOf("-")
+                                : job.title.indexOf("(")
+                            )
+                          : job.title}
                       </h3>
                     </div>
                     <div className="flex items-center text-zinc-400 text-sm">
@@ -125,14 +117,19 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                       </div>
                       <div className="flex items-center">
                         <Briefcase className="h-3.5 w-3.5 mr-1 text-yellow-500" />
-                        <span>{job.experience}</span>
+                        <span>
+                          {job.experience?.match(/month|months|year|years/) ? (
+                            <p className="text-destructive">Not mentioned</p>
+                          ) : (
+                            job.experience
+                          )}
+                        </span>
                       </div>
                       <div className="flex items-center">
                         <IndianRupee className="h-3.5 w-3.5 mr-1 text-yellow-500" />
                         <span>
                           {// Extracting the currency symbol from the salary string
                           job?.salary?.replace(/₹|\s+/g, " ").trim()}{" "}
-                          (CTC/Year)
                         </span>
                       </div>
                       <div className="flex items-center">
@@ -153,7 +150,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                   <div className="flex items-center mb-2">
                     <Star className="h-4 w-4 text-yellow-500 mr-1 fill-yellow-500" />
                     <span className="font-semibold text-white">
-                      {job.matchPercentage}% Match
+                      {job.matchPercentage}% AI Match
                     </span>
                   </div>
                   <div className="w-24">
@@ -237,6 +234,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
         </motion.div>
       </motion.div>
 
+      {/* Mobile Job Card */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -266,34 +264,60 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                 </div>
               </div>
               {/* Job title */}
-              <h4 className="text-lg font-medium text-white">{job.title}</h4>
+              <h4 className="text-lg font-medium text-white">
+                {job.title.includes("-") || job.title.includes("(")
+                  ? job.title.slice(
+                      0,
+                      job.title.indexOf("-") > -1
+                        ? job.title.indexOf("-")
+                        : job.title.indexOf("(")
+                    )
+                  : job.title}
+              </h4>
 
-              <div className="flex items-center">
-                <Star className="h-3.5 w-3.5 text-yellow-500 mr-1 fill-yellow-500" />
-                <span className="text-sm font-semibold text-white">
-                  {job.matchPercentage}% Match
-                </span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <Star className="h-3.5 w-3.5 text-yellow-500 mr-1 fill-yellow-500" />
+                  <span className="text-sm font-semibold text-yellow-500">
+                    {job.matchPercentage}% AI Match
+                  </span>
+                </div>
+
+                {(job.location === "Remote" ||
+                  job.remote === true ||
+                  job.location === "Work from Home" ||
+                  job.location === "Work from home" ||
+                  job.location === "remote") && (
+                  <Badge
+                    variant="outline"
+                    className="w-fit bg-zinc-800 text-zinc-300 border-zinc-700 text-xs"
+                  >
+                    Remote
+                  </Badge>
+                )}
               </div>
             </CardHeader>
 
             <CardContent className="py-2 space-y-3">
               {/* Job details in a vertical stack */}
-              <div className="grid grid-cols-2 gap-y-2 text-xs text-zinc-400">
+              <div className="space-y-2 gap-y-2 text-xs text-zinc-400">
                 <div className="flex items-center">
                   <MapPin className="h-3 w-3 mr-1 text-yellow-500" />
-                  <span className="truncate">{job.location}</span>
+                  <span className="line-clamp-1">
+                    {job?.location?.length && job?.location?.length > 20
+                      ? job?.location?.slice(0, 30) + "..."
+                      : job?.location}
+                  </span>
                 </div>
-                {job.remote && (
-                  <Badge
-                    variant="outline"
-                    className="justify-self-end w-fit bg-zinc-800 text-zinc-300 border-zinc-700 text-xs"
-                  >
-                    Remote
-                  </Badge>
-                )}
                 <div className="flex items-center">
                   <Briefcase className="h-3 w-3 mr-1 text-yellow-500" />
-                  <span>{job.experience}</span>
+                  <span>
+                    {job.experience?.match(/month|months|year|years/) ? (
+                      <p className="text-destructive">Not mentioned</p>
+                    ) : (
+                      job.experience
+                    )}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-3 w-3 mr-1 text-yellow-500" />
@@ -303,9 +327,7 @@ export default function JobRecommendations({ job }: JobRecommendationsProps) {
                 </div>
                 <div className="flex items-center col-span-2">
                   <IndianRupee className="h-3 w-3 mr-1 text-yellow-500" />
-                  <span>
-                    {job?.salary?.replace(/₹|\s+/g, " ").trim()} (CTC/Year)
-                  </span>
+                  <span>{job?.salary?.replace(/₹|\s+/g, " ").trim()}</span>
                 </div>
               </div>
 

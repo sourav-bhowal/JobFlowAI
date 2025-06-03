@@ -1,7 +1,7 @@
 import { db, lt } from "@repo/db/drizzle";
 import { jobs } from "@repo/db/schema";
 
-// Delete jobs older than 10 days from the database
+// Delete jobs older than 5 days from the database
 export async function GET(request: Request) {
   try {
     // Headers check
@@ -16,17 +16,17 @@ export async function GET(request: Request) {
     }
 
     // Get the current date and time
-    const tenDaysAgo = new Date();
+    const fiveDaysAgo = new Date();
 
-    // Subtract 10 days
-    tenDaysAgo.setDate(tenDaysAgo.getDate() - 10);
+    // Subtract 5 days
+    fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
 
-    // Delete all jobs older than 10 days
-    await db.delete(jobs).where(lt(jobs.createdAt, tenDaysAgo));
+    // Delete all jobs older than 5 days
+    await db.delete(jobs).where(lt(jobs.createdAt, fiveDaysAgo));
 
     // Return success response
     return Response.json(
-      { message: "Successfully deleted jobs older than 10 days" },
+      { message: "Successfully deleted jobs older than 5 days" },
       { status: 200 }
     );
   } catch (error) {
