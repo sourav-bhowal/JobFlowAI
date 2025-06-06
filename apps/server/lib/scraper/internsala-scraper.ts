@@ -2,6 +2,7 @@ import { sendJobsToQueue } from "../queue/producer.js";
 import { SelectJob } from "@repo/db/schema";
 import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
 import { getBrowser } from "./browser.js";
+import { autoScroll } from "../../utils/autoScroll.js";
 
 // Function to scrape jobs from Internshala
 export const internshalaJobScraper = async (): Promise<void> => {
@@ -31,26 +32,6 @@ export const internshalaJobScraper = async (): Promise<void> => {
     await page.goto(BASE_URL, {
       waitUntil: "networkidle2",
     });
-
-    // Auto-scroll function to scroll down the page
-    const autoScroll = async (): Promise<void> => {
-      await page.evaluate(async () => {
-        await new Promise<void>((resolve) => {
-          let totalHeight = 0;
-          const distance = 500;
-          const timer = setInterval(() => {
-            let scrollHeightBefore = document.body.scrollHeight;
-            window.scrollBy(0, distance);
-            totalHeight += distance;
-
-            if (totalHeight >= scrollHeightBefore) {
-              clearInterval(timer);
-              resolve();
-            }
-          }, 500);
-        });
-      });
-    };
 
     // Function to extract job details from the page
     const extractJobs = async (): Promise<SelectJob[]> => {
@@ -146,7 +127,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
       currentPage++
     ) {
       // Auto-scroll to load all jobs on the page
-      await autoScroll();
+      await autoScroll(page);
 
       // Extract jobs from the current page
       let jobsOnPage: SelectJob[] = await extractJobs();

@@ -41,7 +41,7 @@ cron.schedule("0 */6 * * *", async () => {
     // Handle the results of the scrapers
     for (const result of results) {
       if (result.status === "fulfilled") {
-        console.log("Scraper success:", result.value);
+        console.log("Scraper success:", result.status);
       } else {
         console.error("Scraper failed:", result.reason);
       }

@@ -3,6 +3,7 @@ import { sendJobsToQueue } from "../queue/producer.js";
 import { getBrowser } from "./browser.js";
 import UserAgent from "user-agents";
 import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
+import { autoScroll } from "../../utils/autoScroll.js";
 
 // Function to scrape jobs from Naukri
 export const naukriJobScraper = async (): Promise<void> => {
@@ -33,25 +34,6 @@ export const naukriJobScraper = async (): Promise<void> => {
 
     // Go to the Naukri IT jobs page
     await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
-
-    // Auto-scroll function to scroll down the page
-    const autoScroll = async (): Promise<void> => {
-      await page.evaluate(async () => {
-        await new Promise<void>((resolve) => {
-          let totalHeight = 0;
-          const distance = 500;
-          const timer = setInterval(() => {
-            const scrollHeightBefore = document.body.scrollHeight;
-            window.scrollBy(0, distance);
-            totalHeight += distance;
-            if (totalHeight >= scrollHeightBefore) {
-              clearInterval(timer);
-              resolve();
-            }
-          }, 500);
-        });
-      });
-    };
 
     // Function to extract job details from the page
     const extractJobs = async (): Promise<SelectJob[]> => {
@@ -146,7 +128,7 @@ export const naukriJobScraper = async (): Promise<void> => {
     // Loop over 5 pages (or fewer if "Next" button disappears)
     for (let currentPage = 1; currentPage <= 3; currentPage++) {
       // Auto-scroll to load more jobs
-      await autoScroll();
+      await autoScroll(page);
 
       // Extract jobs from the current page
       let jobsOnPage = await extractJobs();
