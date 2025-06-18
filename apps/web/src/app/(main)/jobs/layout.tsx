@@ -1,6 +1,12 @@
-import { db } from "@repo/db/drizzle";
-import { jobs } from "@repo/db/schema";
 import { JobsFilterLayout } from "./Filters";
+import { Metadata } from "next";
+
+// Metadata is a Next.js type that allows us to define metadata for the page
+export const metadata: Metadata = {
+  title: "Jobs",
+  description:
+    "Explore job opportunities tailored to your skills and interests",
+};
 
 export default async function JobsLayout({
   children,

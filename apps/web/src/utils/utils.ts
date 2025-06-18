@@ -471,6 +471,11 @@ export const desiredSkillsOptions: { label: string; value: string }[] = [
   { label: "Other", value: "Other" },
 ];
 
+export interface AllJobsPage {
+  jobs: SelectJob[],
+  nextCursor: string | null
+}
+
 // Jobs Page interface for pagination
 export interface JobsPage {
   jobs: JobWithMatch[];

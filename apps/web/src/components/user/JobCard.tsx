@@ -33,10 +33,11 @@ import { JobWithMatch } from "@/src/utils/utils";
 import Link from "next/link";
 import { itemVariants } from "@/src/utils/variants";
 import { containerVariants } from "@/src/utils/variants";
+import { SelectJob } from "@repo/db/schema";
 
 // Job Card Component Props
 interface JobCardProps {
-  job: JobWithMatch;
+  job: JobWithMatch | SelectJob;
 }
 
 // Job Card Component
@@ -68,10 +69,12 @@ export default function JobCard({ job }: JobCardProps) {
               "bg-zinc-900 border-zinc-800 overflow-hidden transition-all duration-300"
             )}
           >
-            <CardHeader className="pb-0">
+            <CardHeader className="pb-0 text-white">
+              {job.id}
               <div className="flex items-start justify-between">
                 <div className="flex gap-4">
                   <Avatar className="h-12 w-12">
+                    
                     <AvatarImage src={job.logo!!} alt={job.company!!} />
                     <AvatarFallback className="rounded-md text-primary bg-zinc-800">
                       {job
@@ -146,20 +149,22 @@ export default function JobCard({ job }: JobCardProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-col items-end">
-                  <div className="flex items-center mb-2">
-                    <Star className="h-4 w-4 text-yellow-500 mr-1 fill-yellow-500" />
-                    <span className="font-semibold text-white">
-                      {job.matchPercentage}% AI Match
-                    </span>
+                {"matchPercentage" in job && (
+                  <div className="flex flex-col items-end">
+                    <div className="flex items-center mb-2">
+                      <Star className="h-4 w-4 text-yellow-500 mr-1 fill-yellow-500" />
+                      <span className="font-semibold text-white">
+                        {job.matchPercentage}% AI Match
+                      </span>
+                    </div>
+                    <div className="w-24">
+                      <Progress
+                        value={job.matchPercentage}
+                        className="h-1.5 bg-zinc-800"
+                      />
+                    </div>
                   </div>
-                  <div className="w-24">
-                    <Progress
-                      value={job.matchPercentage}
-                      className="h-1.5 bg-zinc-800"
-                    />
-                  </div>
-                </div>
+                )}
               </div>
             </CardHeader>
 
@@ -276,12 +281,14 @@ export default function JobCard({ job }: JobCardProps) {
               </h4>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Star className="h-3.5 w-3.5 text-yellow-500 mr-1 fill-yellow-500" />
-                  <span className="text-sm font-semibold text-yellow-500">
-                    {job.matchPercentage}% AI Match
-                  </span>
-                </div>
+                {"matchPercentage" in job && (
+                  <div className="flex items-center">
+                    <Star className="h-3.5 w-3.5 text-yellow-500 mr-1 fill-yellow-500" />
+                    <span className="text-sm font-semibold text-yellow-500">
+                      {job.matchPercentage}% AI Match
+                    </span>
+                  </div>
+                )}
 
                 {(job.location === "Remote" ||
                   job.remote === true ||

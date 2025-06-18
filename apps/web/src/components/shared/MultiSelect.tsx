@@ -15,16 +15,20 @@ import { useState } from "react";
 
 // Interface for the options
 interface MultiSelectProps {
+  icon?: React.ReactNode; // Optional icon prop
   selected: string[];
   onChange: (updated: string[]) => void;
   fieldName: "roles" | "locations" | "skills";
+  disabled?: boolean; // Optional disabled prop
 }
 
 // MultiSelect component
 export function MultiSelect({
+  icon,
   selected,
   onChange,
   fieldName,
+  disabled = false, // Default to false if not provided
 }: MultiSelectProps) {
   // State to manage the search input
   const [search, setSearch] = useState("");
@@ -70,8 +74,11 @@ export function MultiSelect({
       >
         <Button
           variant="outline"
-          className="md:w-[300px] w-[250px] justify-between"
+          className="md:w-[300px] w-[250px] justify-start text-left gap-2"
+          disabled={disabled} // Disable the button if the prop is true
         >
+          {/* Optional icon can be rendered here if needed */}
+          {icon && <span className="mr-2">{icon}</span>}
           {selected.length > 0
             ? `${selected.length} ${fieldName} selected`
             : `Select ${fieldName}`}
