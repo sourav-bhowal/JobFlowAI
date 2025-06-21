@@ -183,7 +183,7 @@ export default function UserProfile({ user }: UserProfileProps) {
     <div className="min-h-screen bg-zinc-950 text-white">
       {/* Header with user info */}
       <div className="bg-gradient-to-r from-yellow-600/50 to-orange-600/50 border-b border-zinc-800">
-        <div className="container max-w-6xl mx-auto px-4 py-8">
+        <div className="container max-w-6xl mx-auto px-4 pt-28 pb-10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6 max-sm:relative">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}

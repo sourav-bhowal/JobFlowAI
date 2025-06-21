@@ -100,7 +100,11 @@ export default function AuthPage({ isSignIn }: AuthPageProps) {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
       {/* Content */}
-      <div className="relative z-10 w-full max-w-md">
+      <div
+        className={`relative z-10 w-full max-w-md
+        ${isSignIn ? "translate-y-[70px]" : "pt-32 pb-20"}
+        `}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

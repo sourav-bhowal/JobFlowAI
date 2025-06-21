@@ -9,7 +9,7 @@ import React from "react";
 // Loading skeleton for the job card
 export function JobCardLoadingSkeletonSM() {
   return (
-    <div className="flex flex-col max-w-6xl mx-auto">
+    <div className="flex flex-col max-w-6xl mx-auto md:px-4">
       <div className="max-sm:w-full w-64 h-10 bg-zinc-800 rounded-lg animate-pulse mb-6" />
       <div className="flex flex-col gap-4">
         <JobCardSkeleton />
