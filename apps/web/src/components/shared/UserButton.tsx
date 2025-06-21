@@ -29,8 +29,8 @@ export default function UserButton({ loggedInUser }: { loggedInUser: User }) {
       <Button
         variant="ghost"
         className={cn(
-          "flex items-center px-2 hover:bg-zinc-800",
-          isDropdownOpen && "bg-zinc-800"
+          "flex items-center px-2 hover:bg-transparent",
+          isDropdownOpen && "bg-transparent"
         )}
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}

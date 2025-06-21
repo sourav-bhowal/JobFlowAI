@@ -101,7 +101,7 @@ export async function GET(request: NextRequest) {
         ? `${nextCursorRow.match_percentage}|${nextCursorRow.id}`
         : null;
 
-    // Slice
+    // Slice the jobs to return only the number of jobs specified by pageSize
     const recommendedJobs = jobsWithMatch.slice(0, pageSize) as JobWithMatch[];
 
     // Filter out jobs with same title and company name

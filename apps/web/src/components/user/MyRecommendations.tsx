@@ -37,7 +37,7 @@ export default function MyRecommendations() {
   // RENDERING POSTS
   if (status === "pending") {
     return (
-      <div className="min-h-screen py-8 px-4 bg-black">
+      <div className="min-h-screen py-8 pt-[130px] px-4 bg-black">
         <JobCardLoadingSkeletonSM />
       </div>
     );
@@ -57,7 +57,7 @@ export default function MyRecommendations() {
   // IF THERE IS AN ERROR
   if (status === "error") {
     return (
-      <div className="min-h-screen py-8 px-4 bg-black">
+      <div className="min-h-screen py-8 px-4 pt-[130px] bg-black">
         <p className="text-center text-destructive">
           An error occured while loading jobs.
         </p>
@@ -67,7 +67,7 @@ export default function MyRecommendations() {
 
   return (
     <main className="bg-black min-h-screen">
-      <div className="container max-w-6xl mx-auto px-4 py-8">
+      <div className="container max-w-6xl mx-auto px-4 py-8 pt-[130px]">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
             <Briefcase className="h-5 w-5 mr-2 text-yellow-600" />

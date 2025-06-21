@@ -78,10 +78,10 @@ export default function MobileNavBar() {
       {/* Mobile menu, show/hide based on menu state */}
       <div
         ref={menuRef}
-        className="xl:hidden fixed left-0 right-0 top-16 bg-neutral-900 z-50 overflow-hidden"
+        className="xl:hidden rounded-2xl fixed left-0 right-0 top-17 backdrop-blur-md bg-black/90 z-50 overflow-hidden"
         style={{ display: "none", opacity: 0 }} // Initial closed state
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col text-white">
           {/* Navigation links */}
           {loggedInUser
             ? protectedNavLinks.map((link, index) => (
