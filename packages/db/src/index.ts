@@ -22,4 +22,16 @@ pool.on("error", (err) => {
 export const db = drizzle(pool, { schema });
 
 // Export the other modules
-export { sql, cosineDistance, lt } from "drizzle-orm";
+export {
+  sql,
+  cosineDistance,
+  lt,
+  or,
+  and,
+  ilike,
+  desc,
+  inArray,
+  gt,
+  eq,
+  SQL,
+} from "drizzle-orm";

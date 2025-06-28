@@ -70,7 +70,6 @@ export default function JobCard({ job }: JobCardProps) {
             )}
           >
             <CardHeader className="pb-0 text-white">
-              {job.id}
               <div className="flex items-start justify-between">
                 <div className="flex gap-4">
                   <Avatar className="h-12 w-12">
