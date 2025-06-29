@@ -73,10 +73,10 @@ export async function GET(request: NextRequest) {
     // Cursor-based pagination
     if (cursorParam) {
       try {
-        const cursor = JSON.parse(decodeURIComponent(cursorParam)) as {
-          createdAt: string;
-          id: string;
-        };
+        type Cursor = { createdAt: string; id: string };
+
+        const cursor: Cursor = JSON.parse(decodeURIComponent(cursorParam));
+
         const cursorDate = new Date(cursor.createdAt);
 
         if (!isNaN(cursorDate.getTime())) {
@@ -119,7 +119,10 @@ export async function GET(request: NextRequest) {
         : null,
     };
 
-    return Response.json(data, { status: 200 });
+    return Response.json({
+      success: true,
+      data,
+    });
   } catch (error) {
     console.error("Error fetching jobs:", error);
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
