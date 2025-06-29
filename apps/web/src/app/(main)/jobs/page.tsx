@@ -1,13 +1,13 @@
 "use client";
 
-import InfiniteScrollContainer from "@/src/components/shared/InfiniteScrollContainer";
-import { JobCardLoadingSkeletonSM } from "@/src/components/shared/JobCardLoadingSkeleton";
-import JobCard from "@/src/components/user/JobCard";
-import { kyInstance } from "@/src/utils/ky";
-import { AllJobsPage } from "@/src/utils/utils";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+// import InfiniteScrollContainer from "@/src/components/shared/InfiniteScrollContainer";
+// import { JobCardLoadingSkeletonSM } from "@/src/components/shared/JobCardLoadingSkeleton";
+// import JobCard from "@/src/components/user/JobCard";
+// import { kyInstance } from "@/src/utils/ky";
+// import { AllJobsPage } from "@/src/utils/utils";
+// import { useInfiniteQuery } from "@tanstack/react-query";
+// import { Loader2 } from "lucide-react";
+// import { useSearchParams } from "next/navigation";
 
 export default function AllJobs() {
   // const searchParams = useSearchParams();
@@ -75,6 +75,8 @@ export default function AllJobs() {
     //     <Loader2 className="mx-auto my-3 animate-spin text-white" />
     //   )}
     // </InfiniteScrollContainer>
-    <></>
+    <div>
+
+    </div>
   );
 }
