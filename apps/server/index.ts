@@ -3,6 +3,7 @@ import cron from "node-cron";
 import { internshalaJobScraper } from "./lib/scraper/internsala-scraper.js";
 import { naukriJobScraper } from "./lib/scraper/naukri-scraper.js";
 import { consumeJobsFromQueue } from "./lib/queue/consumer.js";
+import { ycJobScraper } from "./lib/scraper/yc-scraper.js";
 
 // Express app
 const app: Application = express();
@@ -36,14 +37,25 @@ cron.schedule("0 */6 * * *", async () => {
     const results = await Promise.allSettled([
       naukriJobScraper(),
       internshalaJobScraper(),
+      ycJobScraper(),
     ]);
 
     // Handle the results of the scrapers
     for (const result of results) {
       if (result.status === "fulfilled") {
-        console.log("Scraper success:", result.status);
+        console.log(
+          "Scraper success:",
+          result.status,
+          "at time:",
+          new Date().toLocaleTimeString()
+        );
       } else {
-        console.error("Scraper failed:", result.reason);
+        console.error(
+          "Scraper failed:",
+          result.reason,
+          "at time:",
+          new Date().toLocaleTimeString()
+        );
       }
     }
 

@@ -49,10 +49,6 @@ export const internshalaJobScraper = async (): Promise<void> => {
             jobElement
               .querySelector(".locations span a")
               ?.textContent?.trim() || "",
-          experience:
-            jobElement
-              .querySelector(".row-1-item:nth-child(2) span")
-              ?.textContent?.trim() || "",
           salary:
             jobElement
               .querySelector(".ic-16-money + span")

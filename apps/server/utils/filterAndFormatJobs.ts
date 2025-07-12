@@ -35,41 +35,61 @@ export const isPostedWithinLast24Hours = (postedAt: string): boolean => {
   return diff <= 1000 * 60 * 60 * 24; // within 24 hours
 };
 
+// New function to check if posted within last N days
+const isPostedWithinLastNDays = (postedAt: string, n: number): boolean => {
+  const match = postedAt.match(/(\d+)\s+day/);
+  if (match) {
+    const days = match[1] ? parseInt(match[1], 10) : 0; // Default to 0 if undefined
+    return days <= n;
+  }
+  return false;
+};
+
 // Function to filter and format jobs from Naukri and Internshala
 export const filterAndFormatJobs = async (
   jobs: SelectJob[],
-  source: "naukri" | "internshala"
+  source: "naukri" | "internshala" | "yc" | "other"
 ): Promise<SelectJob[]> => {
-  // Array of unique jobs to be returned
   const results: SelectJob[] = [];
 
-  // Check if jobs are empty or undefined then return empty array
   for (const job of jobs) {
-    if (!job.title?.trim() || !isPostedWithinLast24Hours(job.postedAt || "")) {
+    const postedAt = job.postedAt || "";
+
+    const isRecent =
+      source === "yc"
+        ? isPostedWithinLastNDays(postedAt, 10)
+        : isPostedWithinLast24Hours(postedAt);
+
+    if (!job.title?.trim() || !isRecent) {
       continue;
     }
 
-    // Create a unique key for the job
-    const key = `${source}:${job.title.trim().toLowerCase()}|${job.company?.trim().toLowerCase()}|${job.location?.trim().toLowerCase()}`;
+    const key = `${source}:${job.title.trim().toLowerCase()}|${job.company
+      ?.trim()
+      .toLowerCase()}|${job.location?.trim().toLowerCase()}`;
 
-    // Check if key exists in Redis (individual key approach)
     const isDuplicate = await redisClient.exists(`seen_jobs:${key}`);
 
     if (!isDuplicate) {
-      // Set key with 7 day expiration
-      await redisClient.set(`seen_jobs:${key}`, 1, "EX", 60 * 60 * 24 * 7);
-      // Normalize job link if needed
+      await redisClient.set(`seen_jobs:${key}`, 1, "EX", 60 * 60 * 24 * 14);
+
       const finalJob = {
         ...job,
-        jobLink:
-          source === "internshala" &&
-          job.jobLink &&
-          !job.jobLink.startsWith("http")
-            ? `https://www.internshala.com${job.jobLink}`
-            : job.jobLink,
+        jobLink: (() => {
+          if (!job.jobLink || job.jobLink.startsWith("http"))
+            return job.jobLink;
+
+          switch (source) {
+            case "internshala":
+              return `https://www.internshala.com${job.jobLink}`;
+            case "yc":
+              return `https://www.ycombinator.com${job.jobLink}`;
+            default:
+              return job.jobLink; // Fallback: return as is
+          }
+        })(),
       };
 
-      // Add the job to the results array
       results.push(finalJob);
     }
   }
