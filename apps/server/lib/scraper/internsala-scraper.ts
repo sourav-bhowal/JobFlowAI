@@ -31,6 +31,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     // Go to the base URL
     await page.goto(BASE_URL, {
       waitUntil: "networkidle2",
+      timeout: 60000,
     });
 
     // Function to extract job details from the page
@@ -85,6 +86,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
       // Go to the job URL
       await jobPage.goto(`https://internshala.com${jobUrl}`, {
         waitUntil: "networkidle2",
+        timeout: 60000,
       });
 
       // Wait for the job details to load

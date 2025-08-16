@@ -24,6 +24,7 @@ export const ycJobScraper = async (): Promise<void> => {
 
     await page.goto(BASE_URL, {
       waitUntil: "networkidle2",
+      timeout: 60000,
     });
 
     await autoScroll(page);
@@ -78,6 +79,7 @@ export const ycJobScraper = async (): Promise<void> => {
 
       await jobPage.goto(`https://www.ycombinator.com/${jobUrl}`, {
         waitUntil: "networkidle2",
+        timeout: 60000,
       });
 
       const jobDetails: Partial<SelectJob> = await jobPage.evaluate(() => {
