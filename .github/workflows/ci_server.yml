@@ -3,8 +3,8 @@ on:
   push:
     branches: [main]
     # Only trigger on changes to the server code
-    paths: 
-      - 'apps/server/**'
+    paths:
+      - "apps/server/**"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,9 +38,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker stop jobflowai_scraper_server || true
-            docker rm jobflowai_scraper_server || true
-            docker rmi souravbhowal/jobflowai_scraper_server || true
+            docker stop $(docker ps -aq) || true
+            docker rm -f $(docker ps -aq) || true
+            docker rmi -f $(docker images -aq) || true
+            docker volume rm -f $(docker volume ls -q) || true
+            docker network rm $(docker network ls -q) || true
+            docker system prune -a --volumes -f
             docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
             docker run --name jobflowai_scraper_server -d \
                 --restart unless-stopped \
