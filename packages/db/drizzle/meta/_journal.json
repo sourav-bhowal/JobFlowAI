@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1744042088790,
-      "tag": "0000_long_shadowcat",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1744045265149,
-      "tag": "0001_tearful_thaddeus_ross",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1744048357803,
-      "tag": "0002_brown_spitfire",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1744294686095,
-      "tag": "0003_smiling_supernaut",
+      "when": 1755336841055,
+      "tag": "0000_warm_quicksilver",
       "breakpoints": true
     }
   ]

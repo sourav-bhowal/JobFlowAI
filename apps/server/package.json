@@ -12,9 +12,10 @@
   "dependencies": {
     "@repo/db": "*",
     "@repo/openai": "*",
-    "@repo/redis": "*",
     "@repo/rabbitmq": "*",
+    "@repo/redis": "*",
     "@types/express": "^5.0.1",
+    "@types/node-cron": "^3.0.11",
     "@types/user-agents": "^1.0.4",
     "express": "^5.1.0",
     "node-cron": "^3.0.3",

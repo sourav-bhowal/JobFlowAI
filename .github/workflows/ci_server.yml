@@ -38,9 +38,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker stop jobflowai_scraper_server
-            docker rm jobflowai_scraper_server
-            docker image prune -f
+            docker stop jobflowai_scraper_server || true
+            docker rm jobflowai_scraper_server || true
+            docker rmi souravbhowal/jobflowai_scraper_server || true
             docker pull souravbhowal/jobflowai_scraper_server:${{ github.sha }}
             docker run --name jobflowai_scraper_server -d \
                 --restart unless-stopped \

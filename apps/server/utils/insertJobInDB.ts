@@ -15,20 +15,6 @@ export async function insertJobInDB(jobBatch: SelectJob[]) {
 
     // Step 2: Prepare the data for insertion
     const jobsToInsert = jobBatch.map((job, index) => ({
-      companyName: job.companyName,
-      companyLink: job.companyLink,
-      responsibilities: job.responsibilities,
-      tags: job.tags,
-      benefits: job.benefits,
-      currency: job.currency,
-      salaryFrequency: job.salaryFrequency,
-      minSalary: job.minSalary,
-      maxSalary: job.maxSalary,
-      insights: job.insights,
-      applyLink: job.applyLink,
-      applyBy: job.applyBy,
-
-      // Internshala specific fields
       title: job.title || "",
       company: job.company,
       location: job.location,

@@ -14,7 +14,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
 
   // Base URL for Internshala jobs
   const BASE_URL =
-    "https://internshala.com/internships/computer-science-internship";
+    "https://internshala.com/jobs/computer-science-jobs/";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -119,7 +119,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     // Loop through the pages to scrape jobs
     for (
       let currentPage = 1;
-      currentPage <= Math.min(3, totalPages); // limit to 10 pages for now
+      currentPage <= Math.min(3, totalPages); // limit to 3 pages for now
       currentPage++
     ) {
       // Auto-scroll to load all jobs on the page
