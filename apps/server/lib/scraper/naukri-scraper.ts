@@ -1,7 +1,6 @@
 import { SelectJob } from "@repo/db/schema";
 import { sendJobsToQueue } from "../queue/producer.js";
 import { getBrowser } from "./browser.js";
-import UserAgent from "user-agents";
 import { filterAndFormatJobs } from "../../utils/filterAndFormatJobs.js";
 import { autoScroll } from "../../utils/autoScroll.js";
 
@@ -23,14 +22,32 @@ export const naukriJobScraper = async (): Promise<void> => {
     // Open a new page
     const page = await browser.newPage();
 
-    // Generate a random user agent
-    const userAgent = new UserAgent();
+    // Evaluate the page to remove automation flags
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, "webdriver", { get: () => undefined });
+      Object.defineProperty(navigator, "plugins", {
+        get: () => [1, 2, 3, 4, 5],
+      });
+      Object.defineProperty(navigator, "languages", {
+        get: () => ["en-US", "en"],
+      });
+    });
 
     // Set user agent to mimic a real browser
     await page.setUserAgent(
-      userAgent.toString() ||
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
     );
+
+    // Set Extra HTTP headers to mimic a real browser
+    await page.setExtraHTTPHeaders({
+      "Accept-Language": "en-US,en;q=0.9",
+      Accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Encoding": "gzip, deflate, br",
+      DNT: "1",
+      Connection: "keep-alive",
+      "Upgrade-Insecure-Requests": "1",
+    });
 
     // Go to the Naukri IT jobs page
     await page.goto(BASE_URL, { waitUntil: "networkidle2", timeout: 60000 });
@@ -79,8 +96,7 @@ export const naukriJobScraper = async (): Promise<void> => {
 
       // Set user agent to mimic a real browser
       await jobPage.setUserAgent(
-        userAgent.toString() ||
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
       );
 
       // Set Extra HTTP headers to mimic a real browser

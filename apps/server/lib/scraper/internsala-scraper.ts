@@ -13,8 +13,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
   `);
 
   // Base URL for Internshala jobs
-  const BASE_URL =
-    "https://internshala.com/jobs/computer-science-jobs/";
+  const BASE_URL = "https://internshala.com/jobs/computer-science-jobs/";
 
   // Launch Puppeteer browser
   const browser = await getBrowser();
@@ -31,7 +30,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
     // Go to the base URL
     await page.goto(BASE_URL, {
       waitUntil: "networkidle2",
-      timeout: 60000,
+      // timeout: 60000,
     });
 
     // Function to extract job details from the page
@@ -86,7 +85,7 @@ export const internshalaJobScraper = async (): Promise<void> => {
       // Go to the job URL
       await jobPage.goto(`https://internshala.com${jobUrl}`, {
         waitUntil: "networkidle2",
-        timeout: 60000,
+        // timeout: 60000,
       });
 
       // Wait for the job details to load
